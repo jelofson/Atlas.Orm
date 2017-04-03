@@ -35,7 +35,8 @@ class AtlasContainer extends AbstractContainer
      * @param mixed $dsn A specifier for a default database connection. This
      * can be a PDO or ExtendedPdo instance, in which case all remaining params
      * are ignored. This can also be a DSN connection string. Finally, if it is
-     * null, the default connection values
+     * null, the default connection values are pulled from the environment keys
+     * `ATLAS_PDO_(DSN|USERNAME|PASSWORD|OPTIONS|ATTRIBUTES)`.
      *
      * @param string $username The default database connection username.
      *
@@ -153,8 +154,10 @@ class AtlasContainer extends AbstractContainer
 
         $this->getMapperLocator()->set(
             $mapperClass,
-            $this->new($mapperClass)->args(
-                $this->callService(TableLocator::CLASS, 'get', $tableClass),
+            $this->closure(
+                'newInstance',
+                $mapperClass,
+                $this->serviceCall(TableLocator::CLASS, 'get', $tableClass),
                 $this->new(Relationships::CLASS),
                 $this->new($eventsClass)
             )
@@ -179,22 +182,23 @@ class AtlasContainer extends AbstractContainer
             return function () use ($spec) { return $spec; };
         }
 
-        $self = $this;
         if ($spec instanceof PDO) {
-            return function () use ($self) {
-                return $self->newInstance(ExtendedPdo::CLASS, [$spec]);
-            };
+            return $this->closure(
+                'newInstance',
+                ExtendedPdo::CLASS,
+                $spec
+            );
         }
 
-        return function () use ($self) {
-            return $self->newInstance(ExtendedPdo::CLASS, [
-                $self->env('ATLAS_PDO_DSN'),
-                $self->env('ATLAS_PDO_USERNAME'),
-                $self->env('ATLAS_PDO_PASSWORD'),
-                $self->env('ATLAS_PDO_OPTIONS') ?? [],
-                $self->env('ATLAS_PDO_ATTRIBUTES') ?? [],
-            ]);
-        };
+        return $this->closure(
+            'newInstance',
+            ExtendedPdo::CLASS,
+            $this->env('ATLAS_PDO_DSN'),
+            $this->env('ATLAS_PDO_USERNAME'),
+            $this->env('ATLAS_PDO_PASSWORD'),
+            $this->env('ATLAS_PDO_OPTIONS') ?? [],
+            $this->env('ATLAS_PDO_ATTRIBUTES') ?? []
+        );
     }
 
     protected function setTable($tableClass)
@@ -210,7 +214,9 @@ class AtlasContainer extends AbstractContainer
 
         $this->getTableLocator()->set(
             $tableClass,
-            $this->new($tableClass)->args(
+            $this->closure(
+                'newInstance',
+                $tableClass,
                 $this->service(ConnectionLocator::CLASS),
                 $this->service(QueryFactory::CLASS),
                 $this->new(IdentityMap::CLASS),
