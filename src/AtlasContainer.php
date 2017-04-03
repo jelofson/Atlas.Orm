@@ -32,17 +32,18 @@ class AtlasContainer extends AbstractContainer
      *
      * Constructor.
      *
-     * @param ExtendedPdo|PDO|$dsn The data source name for a default
-     * Lazy PDO connection, or an existing database connection. If the latter,
-     * the remaining params are ignored.
+     * @param mixed $dsn A specifier for a default database connection. This
+     * can be a PDO or ExtendedPdo instance, in which case all remaining params
+     * are ignored. This can also be a DSN connection string. Finally, if it is
+     * null, the default connection values
      *
-     * @param $username The default database connection username.
+     * @param string $username The default database connection username.
      *
-     * @param $password The default database connection password.
+     * @param string $password The default database connection password.
      *
      * @param array $options The default database connection options.
      *
-     * @param array $attributes The default database connection attributes.
+     * @param array $attributes The default post-connection attributes.
      *
      * @see ExtendedPdo::__construct()
      *
@@ -51,16 +52,20 @@ class AtlasContainer extends AbstractContainer
         $dsn = null,
         $username = null,
         $password = null,
-        array $options = [],
-        array $attributes = []
+        array $options = null,
+        array $attributes = null
     ) {
-        parent::__construct([
-            'ATLAS_PDO_DSN' => $dsn,
-            'ATLAS_PDO_USERNAME' => $username,
-            'ATLAS_PDO_PASSWORD' => $password,
-            'ATLAS_PDO_OPTIONS' => $options,
-            'ATLAS_PDO_ATTRIBUTES' => $attributes,
-        ]);
+        $env = [];
+        if ($dsn !== null) {
+            $env = [
+                'ATLAS_PDO_DSN' => $dsn,
+                'ATLAS_PDO_USERNAME' => $username,
+                'ATLAS_PDO_PASSWORD' => $password,
+                'ATLAS_PDO_OPTIONS' => $options,
+                'ATLAS_PDO_ATTRIBUTES' => $attributes,
+            ];
+        }
+        parent::__construct($env);
     }
 
     public function getAtlas() : Atlas
@@ -186,8 +191,8 @@ class AtlasContainer extends AbstractContainer
                 $self->env('ATLAS_PDO_DSN'),
                 $self->env('ATLAS_PDO_USERNAME'),
                 $self->env('ATLAS_PDO_PASSWORD'),
-                $self->env('ATLAS_PDO_OPTIONS'),
-                $self->env('ATLAS_PDO_ATTRIBUTES')
+                $self->env('ATLAS_PDO_OPTIONS') ?? [],
+                $self->env('ATLAS_PDO_ATTRIBUTES') ?? [],
             ]);
         };
     }
