@@ -26,7 +26,7 @@ use Capsule\Di\AbstractContainer;
  * @package atlas/orm
  *
  */
-class AtlasContainer extends AbstractContainer
+class AbstractAtlasContainer extends AbstractContainer
 {
     /**
      *
@@ -69,9 +69,9 @@ class AtlasContainer extends AbstractContainer
         parent::__construct($env);
     }
 
-    public function getAtlas() : Atlas
+    public function getConnectionLocator() : ConnectionLocator
     {
-        return $this->serviceInstance(Atlas::CLASS);
+        return $this->serviceInstance(ConnectionLocator::CLASS);
     }
 
     public function getTableLocator() : TableLocator
@@ -84,9 +84,9 @@ class AtlasContainer extends AbstractContainer
         return $this->serviceInstance(MapperLocator::CLASS);
     }
 
-    public function getConnectionLocator() : ConnectionLocator
+    public function getAtlas() : Atlas
     {
-        return $this->serviceInstance(ConnectionLocator::CLASS);
+        return $this->serviceInstance(Atlas::CLASS);
     }
 
     /**
@@ -103,21 +103,21 @@ class AtlasContainer extends AbstractContainer
         parent::init();
 
         /* provided services */
-        $this->provide(Atlas::CLASS)
-            ->args(
-                $this->service(MapperLocator::CLASS),
-                $this->new(Transaction::CLASS)
-            );
-
         $this->provide(ConnectionLocator::CLASS)
             ->args($this->getDefaultConnection());
+
+        $this->provide(QueryFactory::CLASS)
+            ->args($this->getPdoDriver());
 
         $this->provide(TableLocator::CLASS);
 
         $this->provide(MapperLocator::CLASS);
 
-        $this->provide(QueryFactory::CLASS)
-            ->args($this->getPdoDriver());
+        $this->provide(Atlas::CLASS)
+            ->args(
+                $this->service(MapperLocator::CLASS),
+                $this->new(Transaction::CLASS)
+            );
 
         /* default configurations */
         $this->default(Transaction::CLASS)
@@ -131,14 +131,14 @@ class AtlasContainer extends AbstractContainer
             );
     }
 
-    public function setMappers(array $mapperClasses)
+    protected function setMappers(...$mapperClasses)
     {
         foreach ($mapperClasses as $mapperClass) {
             $this->setMapper($mapperClass);
         }
     }
 
-    public function setMapper($mapperClass)
+    protected function setMapper($mapperClass)
     {
         if (! class_exists($mapperClass)) {
             throw Exception::classDoesNotExist($mapperClass);
@@ -152,7 +152,8 @@ class AtlasContainer extends AbstractContainer
             $eventsClass = MapperEvents::CLASS;
         }
 
-        $this->getMapperLocator()->set(
+        $this->default(MapperLocator::CLASS)->call(
+            'set',
             $mapperClass,
             $this->closure(
                 'newInstance',
@@ -212,7 +213,8 @@ class AtlasContainer extends AbstractContainer
             $eventsClass = TableEvents::CLASS;
         }
 
-        $this->getTableLocator()->set(
+        $this->default(TableLocator::CLASS)->call(
+            'set',
             $tableClass,
             $this->closure(
                 'newInstance',

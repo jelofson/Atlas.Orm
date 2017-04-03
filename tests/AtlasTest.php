@@ -1,14 +1,11 @@
 <?php
 namespace Atlas\Orm;
 
+use Atlas\Orm\DataSource\ForumAtlasContainer;
 use Atlas\Orm\DataSource\Author\AuthorMapper;
 use Atlas\Orm\DataSource\Reply\ReplyMapper;
 use Atlas\Orm\DataSource\Reply\ReplyRecord;
 use Atlas\Orm\DataSource\Reply\ReplyRecordSet;
-use Atlas\Orm\DataSource\Summary\SummaryMapper;
-use Atlas\Orm\DataSource\Summary\SummaryTable;
-use Atlas\Orm\DataSource\Tag\TagMapper;
-use Atlas\Orm\DataSource\Tagging\TaggingMapper;
 use Atlas\Orm\DataSource\Thread\ThreadMapper;
 use Atlas\Orm\DataSource\Thread\ThreadRecord;
 use Atlas\Orm\DataSource\Thread\ThreadRecordSet;
@@ -28,15 +25,7 @@ class AtlasTest extends \PHPUnit\Framework\TestCase
 
     protected function setUp()
     {
-        $atlasContainer = new AtlasContainer('sqlite::memory:');
-        $atlasContainer->setMappers([
-            AuthorMapper::CLASS,
-            ReplyMapper::CLASS,
-            SummaryMapper::CLASS,
-            TagMapper::CLASS,
-            ThreadMapper::CLASS,
-            TaggingMapper::CLASS,
-        ]);
+        $atlasContainer = new ForumAtlasContainer('sqlite::memory:');
 
         $connection = $atlasContainer->getConnectionLocator()->getDefault();
         $fixture = new SqliteFixture($connection);

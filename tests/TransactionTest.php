@@ -1,6 +1,7 @@
 <?php
 namespace Atlas\Orm;
 
+use Atlas\Orm\DataSource\EmploymentAtlasContainer;
 use Atlas\Orm\DataSource\Employee\EmployeeMapper;
 use Atlas\Orm\Mapper\Record;
 use Aura\Sql\ExtendedPdo;
@@ -13,11 +14,7 @@ class TransactionTest extends \PHPUnit\Framework\TestCase
 
     protected function setUp()
     {
-        $atlasContainer = new AtlasContainer('sqlite::memory:');
-
-        $atlasContainer->setMappers([
-            EmployeeMapper::CLASS,
-        ]);
+        $atlasContainer = new EmploymentAtlasContainer('sqlite::memory:');
 
         $connection = $atlasContainer->getConnectionLocator()->getDefault();
         $fixture = new SqliteFixture($connection);

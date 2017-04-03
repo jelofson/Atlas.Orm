@@ -1,15 +1,15 @@
 <?php
 namespace Atlas\Orm;
 
-use Atlas\Orm\Exception;
 use Atlas\Orm\DataSource\Author\AuthorMapper;
-use Atlas\Orm\DataSource\Author\AuthorTableEvents;
+use Atlas\Orm\DataSource\ForumAtlasContainer;
 use Atlas\Orm\DataSource\Reply\ReplyMapper;
 use Atlas\Orm\DataSource\Summary\SummaryMapper;
-use Atlas\Orm\DataSource\Summary\SummaryTable;
 use Atlas\Orm\DataSource\Tag\TagMapper;
-use Atlas\Orm\DataSource\Thread\ThreadMapper;
 use Atlas\Orm\DataSource\Tagging\TaggingMapper;
+use Atlas\Orm\DataSource\Thread\ThreadMapper;
+use Atlas\Orm\Exception;
+
 use Aura\Sql\ExtendedPdo;
 
 class AtlasContainerTest extends \PHPUnit\Framework\TestCase
@@ -18,21 +18,11 @@ class AtlasContainerTest extends \PHPUnit\Framework\TestCase
 
     protected function setUp()
     {
-        $this->atlasContainer = new AtlasContainer('sqlite::memory:');
+        $this->atlasContainer = new ForumAtlasContainer('sqlite::memory:');
     }
 
     public function test()
     {
-        // mappers
-        $this->atlasContainer->setMappers([
-            AuthorMapper::CLASS,
-            ReplyMapper::CLASS,
-            SummaryMapper::CLASS,
-            TagMapper::CLASS,
-            ThreadMapper::CLASS,
-            TaggingMapper::CLASS,
-        ]);
-
         // get the atlas
         $atlas = $this->atlasContainer->getAtlas();
 
@@ -47,6 +37,8 @@ class AtlasContainerTest extends \PHPUnit\Framework\TestCase
 
     public function testSetMapper_noSuchMapper()
     {
+        $this->markTestIncomplete('need to test setting missing mappers');
+
         $this->expectException(
             Exception::CLASS,
             'FooMapper does not exist'

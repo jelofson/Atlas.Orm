@@ -1,10 +1,8 @@
 <?php
 namespace Atlas\Orm;
 
-use Atlas\Orm\DataSource\Course\CourseMapper;
+use Atlas\Orm\DataSource\SchoolAtlasContainer;
 use Atlas\Orm\DataSource\Degree\DegreeMapper;
-use Atlas\Orm\DataSource\Enrollment\EnrollmentMapper;
-use Atlas\Orm\DataSource\Gpa\GpaMapper;
 use Atlas\Orm\DataSource\Student\StudentMapper;
 use Aura\Sql\ExtendedPdo;
 
@@ -16,14 +14,7 @@ class AtlasCompositeTest extends \PHPUnit\Framework\TestCase
 
     protected function setUp()
     {
-        $atlasContainer = new AtlasContainer('sqlite::memory:');
-        $atlasContainer->setMappers([
-            CourseMapper::CLASS,
-            DegreeMapper::CLASS,
-            EnrollmentMapper::CLASS,
-            GpaMapper::CLASS,
-            StudentMapper::CLASS,
-        ]);
+        $atlasContainer = new SchoolAtlasContainer('sqlite::memory:');
 
         $connection = $atlasContainer->getConnectionLocator()->getDefault();
         $fixture = new SqliteFixture($connection);
