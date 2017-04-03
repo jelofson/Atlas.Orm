@@ -25,15 +25,14 @@ class AtlasTest extends \PHPUnit\Framework\TestCase
 
     protected function setUp()
     {
-        $atlasContainer = new ForumAtlasContainer('sqlite::memory:');
-
-        $connection = $atlasContainer->getConnectionLocator()->getDefault();
+        $connection = new ExtendedPdo('sqlite::memory:');
         $fixture = new SqliteFixture($connection);
         $fixture->exec();
 
         $this->profiler = new Profiler();
         $connection->setProfiler($this->profiler);
 
+        $atlasContainer = new ForumAtlasContainer($connection);
         $this->atlas = $atlasContainer->getAtlas();
     }
 

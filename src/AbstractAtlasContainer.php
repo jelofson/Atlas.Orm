@@ -18,6 +18,7 @@ use Aura\Sql\ConnectionLocator;
 use Aura\Sql\ExtendedPdo;
 use Aura\SqlQuery\QueryFactory;
 use Capsule\Di\AbstractContainer;
+use PDO;
 
 /**
  *
@@ -67,16 +68,6 @@ class AbstractAtlasContainer extends AbstractContainer
             ];
         }
         parent::__construct($env);
-    }
-
-    public function getConnectionLocator() : ConnectionLocator
-    {
-        return $this->serviceInstance(ConnectionLocator::CLASS);
-    }
-
-    public function getTableLocator() : TableLocator
-    {
-        return $this->serviceInstance(TableLocator::CLASS);
     }
 
     public function getMapperLocator() : MapperLocator
@@ -169,7 +160,7 @@ class AbstractAtlasContainer extends AbstractContainer
     {
         $spec = $this->env('ATLAS_PDO_DSN');
         if ($spec instanceof PDO) {
-            return $pdo->getAttribute(ExtendedPdo::ATTR_DRIVER_NAME);
+            return $spec->getAttribute(PDO::ATTR_DRIVER_NAME);
         }
         $parts = explode(':', $spec);
         return array_shift($parts);

@@ -12,10 +12,11 @@ abstract class AbstractRelationshipTest extends \PHPUnit\Framework\TestCase
 
     protected function setUp()
     {
-        $atlasContainer = new ForumAtlasContainer('sqlite::memory:');
-        $this->mapperLocator = $atlasContainer->getMapperLocator();
-        $connection = $atlasContainer->getConnectionLocator()->getDefault();
+        $connection = new ExtendedPdo('sqlite::memory:');
         $fixture = new SqliteFixture($connection);
         $fixture->exec();
+
+        $atlasContainer = new ForumAtlasContainer($connection);
+        $this->mapperLocator = $atlasContainer->getMapperLocator();
     }
 }

@@ -14,12 +14,11 @@ class TransactionTest extends \PHPUnit\Framework\TestCase
 
     protected function setUp()
     {
-        $atlasContainer = new EmploymentAtlasContainer('sqlite::memory:');
-
-        $connection = $atlasContainer->getConnectionLocator()->getDefault();
+        $connection = new ExtendedPdo('sqlite::memory:');
         $fixture = new SqliteFixture($connection);
         $fixture->exec();
 
+        $atlasContainer = new EmploymentAtlasContainer($connection);
         $this->atlas = $atlasContainer->getAtlas();
     }
 

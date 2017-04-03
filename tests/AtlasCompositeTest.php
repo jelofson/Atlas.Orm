@@ -14,12 +14,11 @@ class AtlasCompositeTest extends \PHPUnit\Framework\TestCase
 
     protected function setUp()
     {
-        $atlasContainer = new SchoolAtlasContainer('sqlite::memory:');
-
-        $connection = $atlasContainer->getConnectionLocator()->getDefault();
+        $connection = new ExtendedPdo('sqlite::memory:');
         $fixture = new SqliteFixture($connection);
         $fixture->exec();
 
+        $atlasContainer = new SchoolAtlasContainer($connection);
         $this->atlas = $atlasContainer->getAtlas();
     }
 
