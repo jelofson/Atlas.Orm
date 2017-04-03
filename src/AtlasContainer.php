@@ -100,7 +100,7 @@ class AtlasContainer extends AbstractContainer
         $this->provide(Atlas::CLASS)
             ->args(
                 $this->service(MapperLocator::CLASS),
-                $this->create(Transaction::CLASS)
+                $this->new(Transaction::CLASS)
             );
 
         $this->provide(ConnectionLocator::CLASS)
@@ -146,13 +146,14 @@ class AtlasContainer extends AbstractContainer
             $eventsClass = MapperEvents::CLASS;
         }
 
-        $create = $this->create($mapperClass)->args(
-                $this->lazy([$this->getTableLocator(), 'get'], $tableClass),
-                $this->create(Relationships::CLASS),
-                $this->create($eventsClass)
-            );
-
-        $this->getMapperLocator()->set($mapperClass, $create);
+        $this->getMapperLocator()->set(
+            $mapperClass,
+            $this->new($mapperClass)->args(
+                $this->callService(TableLocator::CLASS, 'get', $tableClass),
+                $this->new(Relationships::CLASS),
+                $this->new($eventsClass)
+            )
+        );
     }
 
     protected function getPdoDriver()
@@ -176,12 +177,12 @@ class AtlasContainer extends AbstractContainer
         $self = $this;
         if ($spec instanceof PDO) {
             return function () use ($self) {
-                return $self->createInstance(ExtendedPdo::CLASS, [$spec]);
+                return $self->newInstance(ExtendedPdo::CLASS, [$spec]);
             };
         }
 
         return function () use ($self) {
-            return $self->createInstance(ExtendedPdo::CLASS, [
+            return $self->newInstance(ExtendedPdo::CLASS, [
                 $self->env('ATLAS_PDO_DSN'),
                 $self->env('ATLAS_PDO_USERNAME'),
                 $self->env('ATLAS_PDO_PASSWORD'),
@@ -204,11 +205,11 @@ class AtlasContainer extends AbstractContainer
 
         $this->getTableLocator()->set(
             $tableClass,
-            $this->create($tableClass)->args(
+            $this->new($tableClass)->args(
                 $this->service(ConnectionLocator::CLASS),
                 $this->service(QueryFactory::CLASS),
-                $this->create(IdentityMap::CLASS),
-                $this->create($eventsClass)
+                $this->new(IdentityMap::CLASS),
+                $this->new($eventsClass)
             )
         );
     }
