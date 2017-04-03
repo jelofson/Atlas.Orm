@@ -12,7 +12,7 @@ use Atlas\Orm\DataSource\Thread\ThreadMapper;
 use Atlas\Orm\DataSource\Tagging\TaggingMapper;
 use Aura\Sql\ExtendedPdo;
 
-class AtlasContainerTest extends \PHPUnit_Framework_TestCase
+class AtlasContainerTest extends \PHPUnit\Framework\TestCase
 {
     protected $atlasContainer;
 
@@ -33,11 +33,6 @@ class AtlasContainerTest extends \PHPUnit_Framework_TestCase
             TaggingMapper::CLASS,
         ]);
 
-        // fake a special factory for a row filter
-        $this->atlasContainer->setFactoryFor(AuthorTableEvents::CLASS, function () {
-            return new AuthorTableEvents();
-        });
-
         // get the atlas
         $atlas = $this->atlasContainer->getAtlas();
 
@@ -52,7 +47,7 @@ class AtlasContainerTest extends \PHPUnit_Framework_TestCase
 
     public function testSetMapper_noSuchMapper()
     {
-        $this->setExpectedException(
+        $this->expectException(
             Exception::CLASS,
             'FooMapper does not exist'
         );

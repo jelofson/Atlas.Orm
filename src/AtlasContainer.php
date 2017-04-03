@@ -17,6 +17,7 @@ use Atlas\Orm\Table\IdentityMap;
 use Aura\Sql\ConnectionLocator;
 use Aura\Sql\ExtendedPdo;
 use Aura\SqlQuery\QueryFactory;
+use Capsule\Di\AbstractContainer;
 
 /**
  *
@@ -25,73 +26,19 @@ use Aura\SqlQuery\QueryFactory;
  * @package atlas/orm
  *
  */
-class AtlasContainer
+class AtlasContainer extends AbstractContainer
 {
-    /**
-     *
-     * The Atlas instance managed by this container.
-     *
-     * @var Atlas
-     *
-     */
-    protected $atlas;
-
-    /**
-     *
-     * A locator for database connections.
-     *
-     * @var ConnectionLocator
-     *
-     */
-    protected $connectionLocator;
-
-    /**
-     *
-     * Custom object factories.
-     *
-     * @var array
-     *
-     */
-    protected $factories = [];
-
-    /**
-     *
-     * A locator for all Mapper objects.
-     *
-     * @var MapperLocator
-     *
-     */
-    protected $mapperLocator;
-
-    /**
-     *
-     * A factory for query objects.
-     *
-     * @var QueryFactory
-     *
-     */
-    protected $queryFactory;
-
-    /**
-     *
-     * A locator for all Table objects.
-     *
-     * @var TableLocator
-     *
-     */
-    protected $tableLocator;
-
     /**
      *
      * Constructor.
      *
-     * @param ExtendedPdo|PDO|string $dsn The data source name for a default
-     * lazy PDO connection, or an existing database connection. If the latter,
+     * @param ExtendedPdo|PDO|$dsn The data source name for a default
+     * Lazy PDO connection, or an existing database connection. If the latter,
      * the remaining params are ignored.
      *
-     * @param string $username The default database connection username.
+     * @param $username The default database connection username.
      *
-     * @param string $password The default database connection password.
+     * @param $password The default database connection password.
      *
      * @param array $options The default database connection options.
      *
@@ -101,148 +48,83 @@ class AtlasContainer
      *
      */
     public function __construct(
-        $dsn,
+        $dsn = null,
         $username = null,
         $password = null,
         array $options = [],
         array $attributes = []
     ) {
-        $driver = $this->setConnectionLocator(func_get_args());
-        $this->setQueryFactory($driver);
-        $this->tableLocator = new TableLocator();
-        $this->mapperLocator = new MapperLocator();
-        $this->atlas = new Atlas(
-            $this->mapperLocator,
-            new Transaction($this->mapperLocator)
-        );
+        parent::__construct([
+            'ATLAS_PDO_DSN' => $dsn,
+            'ATLAS_PDO_USERNAME' => $username,
+            'ATLAS_PDO_PASSWORD' => $password,
+            'ATLAS_PDO_OPTIONS' => $options,
+            'ATLAS_PDO_ATTRIBUTES' => $attributes,
+        ]);
     }
 
-    /**
-     *
-     * Creates and sets the connection locator with a default connection.
-     *
-     * @param array $args Params for an building a default connection.
-     *
-     * @see ExtendedPdo::__construct()
-     *
-     */
-    protected function setConnectionLocator(array $args)
+    public function getAtlas() : Atlas
     {
-        switch (true) {
-
-            case $args[0] instanceof ExtendedPdo:
-                $extendedPdo = $args[0];
-                $default = function () use ($extendedPdo) {
-                    return $extendedPdo;
-                };
-                $driver = $extendedPdo->getAttribute(PDO::ATTR_DRIVER_NAME);
-                break;
-
-            case $args[0] instanceof PDO:
-                $extendedPdo = $args[0];
-                $default = function () use ($pdo) {
-                    return new ExtendedPdo($pdo);
-                };
-                $driver = $pdo->getAttribute(ExtendedPdo::ATTR_DRIVER_NAME);
-                break;
-
-            default:
-                $default = function () use ($args) {
-                    return new ExtendedPdo(...$args);
-                };
-                $parts = explode(':', $args[0]);
-                $driver = array_shift($parts);
-                break;
-        }
-
-        $this->connectionLocator = new ConnectionLocator($default);
-        return $driver;
+        return $this->serviceInstance(Atlas::CLASS);
     }
 
-    /**
-     *
-     * Returns the connection locator.
-     *
-     * @return ConnectionLocator
-     *
-     */
-    public function getConnectionLocator()
+    public function getTableLocator() : TableLocator
     {
-        return $this->connectionLocator;
+        return $this->serviceInstance(TableLocator::CLASS);
     }
 
-    /**
-     *
-     * Returns the mapper locator.
-     *
-     * @return MapperLocator
-     *
-     */
-    public function getMapperLocator()
+    public function getMapperLocator() : MapperLocator
     {
-        return $this->mapperLocator;
+        return $this->serviceInstance(MapperLocator::CLASS);
     }
 
-    /**
-     *
-     * Creates and sets the query factory.
-     *
-     * @param string $db The database driver type.
-     *
-     */
-    protected function setQueryFactory($db)
+    public function getConnectionLocator() : ConnectionLocator
     {
-        $this->queryFactory = new QueryFactory($db);
+        return $this->serviceInstance(ConnectionLocator::CLASS);
     }
 
     /**
      *
-     * Returns the Atlas instance managed by this container.
+     * To set custom creation for, say, Events classes, extend init, and then:
      *
-     * @return Atlas
+     * $this->default(WhateverMapper\WhateverEvents::CLASS)->args(...);
+     *
+     * Should we go so far as to make setMapper/s() internal-only as well?
      *
      */
-    public function getAtlas()
+    protected function init()
     {
-        return $this->atlas;
+        parent::init();
+
+        /* provided services */
+        $this->provide(Atlas::CLASS)
+            ->args(
+                $this->service(MapperLocator::CLASS),
+                $this->create(Transaction::CLASS)
+            );
+
+        $this->provide(ConnectionLocator::CLASS)
+            ->args($this->getDefaultConnection());
+
+        $this->provide(TableLocator::CLASS);
+
+        $this->provide(MapperLocator::CLASS);
+
+        $this->provide(QueryFactory::CLASS)
+            ->args($this->getPdoDriver());
+
+        /* default configurations */
+        $this->default(Transaction::CLASS)
+            ->args(
+                $this->service(MapperLocator::CLASS)
+            );
+
+        $this->default(Relationships::CLASS)
+            ->args(
+                $this->service(MapperLocator::CLASS)
+            );
     }
 
-    /**
-     *
-     * Sets a new "read" connection by name into the connection locator.
-     *
-     * @param string $name The connection name.
-     *
-     * @param callable $callable A callable to create and return the connection.
-     *
-     */
-    public function setReadConnection($name, callable $callable)
-    {
-        $this->connectionLocator->setRead($name, $callable);
-    }
-
-    /**
-     *
-     * Sets a new "write" connection by name into the connection locator.
-     *
-     * @param string $name The connection name.
-     *
-     * @param callable $callable A callable to create and return the connection.
-     *
-     */
-    public function setWriteConnection($name, callable $callable)
-    {
-        $this->connectionLocator->setWrite($name, $callable);
-    }
-
-    /**
-     *
-     * Sets multiple mappers into the mapper locator.
-     *
-     * @param array $mapperClasses An array of mapper class names for the
-     * locator.
-     *
-     */
     public function setMappers(array $mapperClasses)
     {
         foreach ($mapperClasses as $mapperClass) {
@@ -250,17 +132,6 @@ class AtlasContainer
         }
     }
 
-    /**
-     *
-     * Sets one mapper into the mapper locator.
-     *
-     * @param string $mapperClass A mapper class names for the locator.
-     *
-     * @throws Exception when the mapper class does not exist.
-     *
-     * @throws Exception when the table class for a mapper does not exist.
-     *
-     */
     public function setMapper($mapperClass)
     {
         if (! class_exists($mapperClass)) {
@@ -268,84 +139,77 @@ class AtlasContainer
         }
 
         $tableClass = $mapperClass::getTableClass();
-        if (! class_exists($tableClass)) {
-            throw Exception::classDoesNotExist($tableClass);
-        }
         $this->setTable($tableClass);
 
         $eventsClass = $mapperClass . 'Events';
-        $eventsClass = class_exists($eventsClass)
-            ? $eventsClass
-            : MapperEvents::CLASS;
-
-        $mapperFactory = function () use ($mapperClass, $tableClass, $eventsClass) {
-            return new $mapperClass(
-                $this->tableLocator->get($tableClass),
-                new Relationships($this->getMapperLocator()),
-                $this->newInstance($eventsClass)
-            );
-        };
-
-        $this->mapperLocator->set($mapperClass, $mapperFactory);
-    }
-
-    /**
-     *
-     * Sets a table into the table locator.
-     *
-     * @param string $tableClass The table class name.
-     *
-     */
-    protected function setTable($tableClass)
-    {
-        $eventsClass = $tableClass . 'Events';
-
-        $eventsClass = class_exists($eventsClass)
-            ? $eventsClass
-            : TableEvents::CLASS;
-
-        $factory = function () use ($tableClass, $eventsClass) {
-            return new $tableClass(
-                $this->connectionLocator,
-                $this->queryFactory,
-                new IdentityMap(),
-                $this->newInstance($eventsClass)
-            );
-        };
-
-        $this->tableLocator->set($tableClass, $factory);
-    }
-
-    /**
-     *
-     * Sets a custom factory for a class.
-     *
-     * @param string $class The class name.
-     *
-     * @param callable $callable A callable to create and return a new instance.
-     *
-     */
-    public function setFactoryFor($class, callable $callable)
-    {
-        $this->factories[$class] = $callable;
-    }
-
-    /**
-     *
-     * Creates and returns a new instance.
-     *
-     * @param string $class Create and return an instance of this class.
-     *
-     * @return object
-     *
-     */
-    public function newInstance($class)
-    {
-        if (isset($this->factories[$class])) {
-            $factory = $this->factories[$class];
-            return $factory();
+        if (! class_exists($eventsClass)) {
+            $eventsClass = MapperEvents::CLASS;
         }
 
-        return new $class();
+        $create = $this->create($mapperClass)->args(
+                $this->lazy([$this->getTableLocator(), 'get'], $tableClass),
+                $this->create(Relationships::CLASS),
+                $this->create($eventsClass)
+            );
+
+        $this->getMapperLocator()->set($mapperClass, $create);
+    }
+
+    protected function getPdoDriver()
+    {
+        $spec = $this->env('ATLAS_PDO_DSN');
+        if ($spec instanceof PDO) {
+            return $pdo->getAttribute(ExtendedPdo::ATTR_DRIVER_NAME);
+        }
+        $parts = explode(':', $spec);
+        return array_shift($parts);
+    }
+
+    protected function getDefaultConnection()
+    {
+        $spec = $this->env('ATLAS_PDO_DSN');
+
+        if ($spec instanceof ExtendedPdo) {
+            return function () use ($spec) { return $spec; };
+        }
+
+        $self = $this;
+        if ($spec instanceof PDO) {
+            return function () use ($self) {
+                return $self->createInstance(ExtendedPdo::CLASS, [$spec]);
+            };
+        }
+
+        return function () use ($self) {
+            return $self->createInstance(ExtendedPdo::CLASS, [
+                $self->env('ATLAS_PDO_DSN'),
+                $self->env('ATLAS_PDO_USERNAME'),
+                $self->env('ATLAS_PDO_PASSWORD'),
+                $self->env('ATLAS_PDO_OPTIONS'),
+                $self->env('ATLAS_PDO_ATTRIBUTES')
+            ]);
+        };
+    }
+
+    protected function setTable($tableClass)
+    {
+        if (! class_exists($tableClass)) {
+            throw Exception::classDoesNotExist($tableClass);
+        }
+
+        $eventsClass = $tableClass . 'Events';
+        if (! class_exists($eventsClass)) {
+            $eventsClass = TableEvents::CLASS;
+        }
+
+        $this->getTableLocator()->set(
+            $tableClass,
+            $this->create($tableClass)->args(
+                $this->service(ConnectionLocator::CLASS),
+                $this->service(QueryFactory::CLASS),
+                $this->create(IdentityMap::CLASS),
+                $this->create($eventsClass)
+            )
+        );
     }
 }

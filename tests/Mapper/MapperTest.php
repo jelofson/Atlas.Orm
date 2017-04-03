@@ -15,7 +15,7 @@ use Aura\Sql\ConnectionLocator;
 use Aura\Sql\ExtendedPdo;
 use Aura\SqlQuery\QueryFactory;
 
-class MapperTest extends \PHPUnit_Framework_TestCase
+class MapperTest extends \PHPUnit\Framework\TestCase
 {
     use Assertions;
 
@@ -300,7 +300,7 @@ class MapperTest extends \PHPUnit_Framework_TestCase
 
         // try to insert again, should fail on unique name
         $this->silenceErrors();
-        $this->setExpectedException(
+        $this->expectException(
             'Atlas\Orm\Exception',
             "Expected 1 row affected, actual 0"
         );
@@ -336,7 +336,7 @@ class MapperTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->mapper->delete($record));
         $record->getRow()->setStatus(Row::SELECTED);
         $record->name = 'Foo';
-        $this->setExpectedException(
+        $this->expectException(
             'Atlas\Orm\Exception',
             "Expected 1 row affected, actual 0"
         );
@@ -360,7 +360,7 @@ class MapperTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expect, count($actual));
 
         // try to delete the record again
-        $this->setExpectedException(
+        $this->expectException(
             'Atlas\Orm\Exception',
             "Expected 1 row affected, actual 0"
         );
@@ -369,7 +369,7 @@ class MapperTest extends \PHPUnit_Framework_TestCase
 
     public function testSelect_numericCol()
     {
-        $this->setExpectedException(
+        $this->expectException(
             'Atlas\Orm\Exception',
             "Expected non-numeric column name, got '0' instead."
         );
@@ -425,7 +425,7 @@ class MapperTest extends \PHPUnit_Framework_TestCase
 
     public function testCannotUseRowNameForRelated()
     {
-        $this->setExpectedException(
+        $this->expectException(
             Exception::CLASS,
             "Relationship 'name' conflicts with existing column name."
         );

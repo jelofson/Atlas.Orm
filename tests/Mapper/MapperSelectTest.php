@@ -11,7 +11,7 @@ use Aura\Sql\ExtendedPdo;
 use Aura\SqlQuery\QueryFactory;
 use Atlas\Orm\DataSource\Employee\EmployeeTable;
 
-class MapperSelectTest extends \PHPUnit_Framework_TestCase
+class MapperSelectTest extends \PHPUnit\Framework\TestCase
 {
     use Assertions;
 
@@ -37,7 +37,7 @@ class MapperSelectTest extends \PHPUnit_Framework_TestCase
         $select = $queryFactory->newSelect()->from('employee');
 
         $this->select = new MapperSelect(
-            $this->getMock('Atlas\Orm\Mapper\MapperInterface'),
+            $this->createMock('Atlas\Orm\Mapper\MapperInterface'),
             new TableSelect($table, $select)
         );
     }
