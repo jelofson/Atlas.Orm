@@ -7,7 +7,6 @@ class ForumAtlasContainer extends AbstractAtlasContainer
 {
     protected function init()
     {
-        parent::init();
         $this->setMappers(
             Author\AuthorMapper::CLASS,
             Reply\ReplyMapper::CLASS,

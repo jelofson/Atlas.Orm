@@ -17,7 +17,7 @@ use Atlas\Orm\Table\TableLocator;
 use Aura\Sql\ConnectionLocator;
 use Aura\Sql\ExtendedPdo;
 use Aura\SqlQuery\QueryFactory;
-use Capsule\Di\AbstractContainer;
+use Capsule\Di\Container;
 use PDO;
 
 /**
@@ -27,7 +27,7 @@ use PDO;
  * @package atlas/orm
  *
  */
-class AbstractAtlasContainer extends AbstractContainer
+abstract class AbstractAtlasContainer extends Container
 {
     /**
      *
@@ -57,41 +57,15 @@ class AbstractAtlasContainer extends AbstractContainer
         array $options = null,
         array $attributes = null
     ) {
-        $env = [];
         if ($dsn !== null) {
-            $env = [
+            $this->setEnv([
                 'ATLAS_PDO_DSN' => $dsn,
                 'ATLAS_PDO_USERNAME' => $username,
                 'ATLAS_PDO_PASSWORD' => $password,
                 'ATLAS_PDO_OPTIONS' => $options,
                 'ATLAS_PDO_ATTRIBUTES' => $attributes,
-            ];
+            ]);
         }
-        parent::__construct($env);
-    }
-
-    public function getMapperLocator() : MapperLocator
-    {
-        return $this->serviceInstance(MapperLocator::CLASS);
-    }
-
-    public function getAtlas() : Atlas
-    {
-        return $this->serviceInstance(Atlas::CLASS);
-    }
-
-    /**
-     *
-     * To set custom creation for, say, Events classes, extend init, and then:
-     *
-     * $this->default(WhateverMapper\WhateverEvents::CLASS)->args(...);
-     *
-     * Should we go so far as to make setMapper/s() internal-only as well?
-     *
-     */
-    protected function init()
-    {
-        parent::init();
 
         /* provided services */
         $this->provide(ConnectionLocator::CLASS)
@@ -120,7 +94,30 @@ class AbstractAtlasContainer extends AbstractContainer
             ->args(
                 $this->service(MapperLocator::CLASS)
             );
+
+        $this->init();
     }
+
+    public function getMapperLocator() : MapperLocator
+    {
+        return $this->serviceInstance(MapperLocator::CLASS);
+    }
+
+    public function getAtlas() : Atlas
+    {
+        return $this->serviceInstance(Atlas::CLASS);
+    }
+
+    /**
+     *
+     * To set custom creation for, say, Events classes, extend init, and then:
+     *
+     * $this->default(WhateverMapper\WhateverEvents::CLASS)->args(...);
+     *
+     * Should we go so far as to make setMapper/s() internal-only as well?
+     *
+     */
+    abstract protected function init();
 
     protected function setMappers(...$mapperClasses)
     {

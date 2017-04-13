@@ -7,7 +7,6 @@ class SchoolAtlasContainer extends AbstractAtlasContainer
 {
     protected function init()
     {
-        parent::init();
         $this->setMappers(
             Course\CourseMapper::CLASS,
             Degree\DegreeMapper::CLASS,

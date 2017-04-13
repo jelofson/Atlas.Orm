@@ -7,7 +7,6 @@ class EmploymentAtlasContainer extends AbstractAtlasContainer
 {
     protected function init()
     {
-        parent::init();
         $this->setMappers(
             Employee\EmployeeMapper::CLASS
         );
