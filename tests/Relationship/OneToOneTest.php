@@ -23,6 +23,8 @@ class OneToOneTest extends AbstractRelationshipTest
             'foreignMapperClass' => 'Atlas\\Orm\\DataSource\\Summary\\SummaryMapper',
             'foreignTableName' => 'summaries',
             'on' => ['native' => 'foreign'],
+            'custom' => null,
+            'ignoreCase' => false,
             'throughName' => null,
         ];
 
@@ -33,7 +35,6 @@ class OneToOneTest extends AbstractRelationshipTest
         $actual = $rel->getSettings();
         $this->assertSame($expect, $actual);
     }
-
 
     public function testStitchIntoRecords_noNativeRecords()
     {

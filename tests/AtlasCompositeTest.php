@@ -207,8 +207,8 @@ class AtlasCompositeTest extends \PHPUnit\Framework\TestCase
             'student' => null,
         ],
         'degree' => [
-            'degree_type' => 'BA',
-            'degree_subject' => 'ENGL',
+            'degree_type' => 'ba',
+            'degree_subject' => 'engl',
             'title' => 'Bachelor of Arts, English',
             'students' => null,
         ],
@@ -282,8 +282,8 @@ class AtlasCompositeTest extends \PHPUnit\Framework\TestCase
                 'student' => NULL,
             ],
             'degree' => [
-                'degree_type' => 'BA',
-                'degree_subject' => 'ENGL',
+                'degree_type' => 'ba',
+                'degree_subject' => 'engl',
                 'title' => 'Bachelor of Arts, English',
                 'students' => NULL,
             ],
@@ -355,8 +355,8 @@ class AtlasCompositeTest extends \PHPUnit\Framework\TestCase
                 'student' => NULL,
             ],
             'degree' => [
-                'degree_type' => 'MA',
-                'degree_subject' => 'HIST',
+                'degree_type' => 'ma',
+                'degree_subject' => 'hist',
                 'title' => 'Master of Arts, History',
                 'students' => NULL,
             ],
@@ -428,8 +428,8 @@ class AtlasCompositeTest extends \PHPUnit\Framework\TestCase
                 'student' => NULL,
             ],
             'degree' => [
-                'degree_type' => 'BS',
-                'degree_subject' => 'MATH',
+                'degree_type' => 'bs',
+                'degree_subject' => 'math',
                 'title' => 'Bachelor of Science, Mathematics',
                 'students' => NULL,
             ],

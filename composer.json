@@ -3,16 +3,16 @@
     "type": "library",
     "description": "A data mapper ORM for your persistence model (not your domain model).",
     "keywords": [ "sql", "data", "mapper", "mapping", "orm" ],
-    "homepage": "http://github.com/atlasphp/Atlas.Atlas",
+    "homepage": "http://github.com/atlasphp/Atlas.Orm",
     "license": "MIT",
     "authors": [
         {
             "name": "Atlas Contributors",
-            "homepage": "https://github.com/atlasphp/Atlas.Atlas/contributors"
+            "homepage": "https://github.com/atlasphp/Atlas.Orm/contributors"
         }
     ],
     "require": {
-        "php": ">=5.6.0",
+        "php": ">=7.1",
         "aura/sql": "~2.0",
         "aura/sqlquery": "~2.0",
         "capsule/di": "~1.0"
@@ -23,7 +23,8 @@
         }
     },
     "require-dev": {
-        "atlas/cli": "0.x-dev",
+        "atlas/cli": "~1.0",
+        "pds/skeleton": "~1.0",
         "phpunit/phpunit": "~6.0"
     },
     "autoload-dev": {
@@ -31,8 +32,6 @@
             "Atlas\\Orm\\": "tests/"
         }
     },
-    "suggest": {
-        "atlas/cli": "0.x command-line interface for atlas for development use"
-    },
     "minimum-stability": "dev"
 }
+
