@@ -1,0 +1,616 @@
+
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+      
+      
+        <link rel="shortcut icon" href="../assets/images/favicon.png">
+      
+      <meta name="generator" content="mkdocs-0.16.3, mkdocs-material-1.7.4">
+    
+    
+      
+        <title>Mapper Relationships - Atlas ORM Documentation</title>
+      
+    
+    
+      <script src="../assets/javascripts/modernizr-1df76c4e58.js"></script>
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/application-769c285a91.css">
+      
+    
+    
+      
+        
+        
+        
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    
+    
+    
+  </head>
+  
+  
+  
+  
+    <body>
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="drawer">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="search">
+    <label class="md-overlay" data-md-component="overlay" for="drawer"></label>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <a href="../getting-started/" title="Atlas ORM Documentation" class="md-icon md-icon--home md-header-nav__button">
+          </a>
+        
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <span class="md-flex__ellipsis md-header-nav__title">
+          
+            
+              
+            
+            Mapper Relationships
+          
+        </span>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="search"></label>
+          
+<div class="md-search" data-md-component="search">
+  <label class="md-search__overlay" for="search"></label>
+  <div class="md-search__inner">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" required placeholder="Search" accesskey="s" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query">
+      <label class="md-icon md-search__icon" for="search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset">close</button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result" data-md-lang-search="">
+          <div class="md-search-result__meta" data-md-lang-result-none="No matching documents" data-md-lang-result-one="1 matching document" data-md-lang-result-other="# matching documents">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="drawer">
+    
+      <i class="md-icon md-icon--home md-nav__button"></i>
+    
+    Atlas ORM Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../getting-started/" title="Getting Started" class="md-nav__link">
+      Getting Started
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        Mapper Relationships
+      </label>
+    
+    <a href="./" title="Mapper Relationships" class="md-nav__link md-nav__link--active">
+      Mapper Relationships
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#relationship-key-columns" title="Relationship Key Columns" class="md-nav__link">
+    Relationship Key Columns
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#composite-relationship-keys" title="Composite Relationship Keys" class="md-nav__link">
+    Composite Relationship Keys
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#case-sensitivity" title="Case-Sensitivity" class="md-nav__link">
+    Case-Sensitivity
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#simple-where-conditions" title="Simple WHERE Conditions" class="md-nav__link">
+    Simple WHERE Conditions
+  </a>
+  
+</li>
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../reading/" title="Reading Records and RecordSets" class="md-nav__link">
+      Reading Records and RecordSets
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../records/" title="Working with Records" class="md-nav__link">
+      Working with Records
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../record-sets/" title="Working with RecordSets" class="md-nav__link">
+      Working with RecordSets
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#relationship-key-columns" title="Relationship Key Columns" class="md-nav__link">
+    Relationship Key Columns
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#composite-relationship-keys" title="Composite Relationship Keys" class="md-nav__link">
+    Composite Relationship Keys
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#case-sensitivity" title="Case-Sensitivity" class="md-nav__link">
+    Case-Sensitivity
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#simple-where-conditions" title="Simple WHERE Conditions" class="md-nav__link">
+    Simple WHERE Conditions
+  </a>
+  
+</li>
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="mapper-relationships">Mapper Relationships</h1>
+<p>You can add relationships to a mapper inside its <code>setRelated()</code> method, calling
+one of the four available relationship-definition methods:</p>
+<ul>
+<li><code>oneToOne($field, $mapperClass)</code> (aka "has one")</li>
+<li><code>manyToOne($field, $mapperClass)</code> (aka "belongs to")</li>
+<li><code>oneToMany($field, $mapperClass)</code> (aka "has many")</li>
+<li><code>manyToMany($field, $mapperClass, $throughField)</code> (aka "has many through")</li>
+</ul>
+<p>The <code>$field</code> will become a field name on the returned Record object. That field
+will be populated from the specified <code>$mapperClass</code> in Atlas. (In the case of
+<code>manyToMany()</code>, the association mappings will come from the specified
+<code>$throughField</code>.)</p>
+<p>Here is an example:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="k">namespace</span> <span class="nx">App\DataSource\Thread</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">App\DataSource\Author\AuthorMapper</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">App\DataSource\Summary\SummaryMapper</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">App\DataSource\Reply\ReplyMapper</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">App\DataSource\Tagging\TaggingMapper</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">App\DataSource\Tag\TagMapper</span><span class="p">;</span>
+<span class="k">use</span> <span class="nx">Atlas\Orm\Mapper\AbstractMapper</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">ThreadMapper</span> <span class="k">extends</span> <span class="nx">AbstractMapper</span>
+<span class="p">{</span>
+    <span class="k">protected</span> <span class="k">function</span> <span class="nf">setRelated</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">manyToOne</span><span class="p">(</span><span class="s1">&#39;author&#39;</span><span class="p">,</span> <span class="nx">AuthorMapper</span><span class="o">::</span><span class="na">CLASS</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">oneToOne</span><span class="p">(</span><span class="s1">&#39;summary&#39;</span><span class="p">,</span> <span class="nx">SummaryMapper</span><span class="o">::</span><span class="na">CLASS</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">oneToMany</span><span class="p">(</span><span class="s1">&#39;replies&#39;</span><span class="p">,</span> <span class="nx">ReplyMapper</span><span class="o">::</span><span class="na">CLASS</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">oneToMany</span><span class="p">(</span><span class="s1">&#39;taggings&#39;</span><span class="p">,</span> <span class="nx">TaggingMapper</span><span class="o">::</span><span class="na">CLASS</span><span class="p">);</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">manyToMany</span><span class="p">(</span><span class="s1">&#39;tags&#39;</span><span class="p">,</span> <span class="nx">TagMapper</span><span class="o">::</span><span class="na">CLASS</span><span class="p">,</span> <span class="s1">&#39;taggings&#39;</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table>
+
+<h2 id="relationship-key-columns">Relationship Key Columns</h2>
+<p>By default, in all relationships except many-to-one, the relationship will take
+the primary key column(s) in the native table, and map to those same column
+names in the foreign table.</p>
+<p>In the case of many-to-one, it is the reverse; that is, the relationship will
+take the primary key column(s) in the foreign table, and map to those same
+column names in the native table.</p>
+<p>If you want to use different columns, call the <code>on()</code> method on the
+relationship. For example, if the threads table uses <code>author_id</code>, but the
+authors table uses just <code>id</code>, you can do this:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="k">class</span> <span class="nc">ThreadMapper</span> <span class="k">extends</span> <span class="nx">AbstractMapper</span>
+<span class="p">{</span>
+    <span class="k">protected</span> <span class="k">function</span> <span class="nf">setRelated</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">manyToOne</span><span class="p">(</span><span class="s1">&#39;author&#39;</span><span class="p">,</span> <span class="nx">AuthorMapper</span><span class="o">::</span><span class="na">CLASS</span><span class="p">)</span>
+            <span class="o">-&gt;</span><span class="na">on</span><span class="p">([</span>
+                <span class="c1">// native (threads) column =&gt; foreign (authors) column</span>
+                <span class="s1">&#39;author_id&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;id&#39;</span><span class="p">,</span>
+            <span class="p">]);</span>
+        <span class="c1">// ...</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table>
+
+<p>And on the <code>oneToMany</code> side of the relationship, you use the native author table
+<code>id</code> column with the foreign threads table <code>author_id</code> column.</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="k">class</span> <span class="nc">AuthorMapper</span> <span class="k">extends</span> <span class="nx">AbstractMapper</span>
+<span class="p">{</span>
+    <span class="k">protected</span> <span class="k">function</span> <span class="nf">setRelated</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">oneToMany</span><span class="p">(</span><span class="s1">&#39;posts&#39;</span><span class="p">,</span> <span class="nx">PostsMapper</span><span class="o">::</span><span class="na">CLASS</span><span class="p">)</span>
+            <span class="o">-&gt;</span><span class="na">on</span><span class="p">([</span>
+                <span class="c1">// native (author) column =&gt; foreign (threads) column</span>
+                <span class="s1">&#39;id&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;author_id&#39;</span><span class="p">,</span>
+            <span class="p">]);</span>
+        <span class="c1">// ...</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table>
+
+<h2 id="composite-relationship-keys">Composite Relationship Keys</h2>
+<p>Likewise, if a table uses a composite key, you can re-map the relationship on
+multiple columns. If table <code>foo</code> has composite primary key columns of <code>acol</code> and
+<code>bcol</code>, and it maps to table <code>bar</code> on <code>foo_acol</code> and <code>foo_bcol</code>, you would do
+this:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="k">class</span> <span class="nc">FooMapper</span>
+<span class="p">{</span>
+    <span class="k">protected</span> <span class="k">function</span> <span class="nf">setRelated</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">oneToMany</span><span class="p">(</span><span class="s1">&#39;bars&#39;</span><span class="p">,</span> <span class="nx">BarMapper</span><span class="o">::</span><span class="na">CLASS</span><span class="p">)</span>
+            <span class="o">-&gt;</span><span class="na">on</span><span class="p">([</span>
+                <span class="c1">// native (foo) column =&gt; foreign (bar) column</span>
+                <span class="s1">&#39;acol&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;foo_acol&#39;</span><span class="p">,</span>
+                <span class="s1">&#39;bcol&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;foo_bcol&#39;</span><span class="p">,</span>
+            <span class="p">]);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table>
+
+<h2 id="case-sensitivity">Case-Sensitivity</h2>
+<blockquote>
+<p>N.b.: This applies only to <strong>string-based</strong> relationship keys. If you are
+using numeric relationship keys, this section does not apply.</p>
+</blockquote>
+<p>Atlas will match records related by string keys in a case-senstive manner. If
+your collations on the related string key columns are <em>not</em> case sensitive,
+Atlas might not match up related records properly in memory after fetching them
+from the database. This is because 'foo' and 'FOO' might be equivalent in the
+database collation, but they are <em>not</em> equivalent in PHP.</p>
+<p>In that kind of situation, you will want to tell the relationship to ignore the
+case of related string key columns when matching related records. You can do so
+with the <code>ignoreCase()</code> method on the relationship definition.</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="k">class</span> <span class="nc">FooMapper</span>
+<span class="p">{</span>
+    <span class="k">protected</span> <span class="k">function</span> <span class="nf">setRelated</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">oneToMany</span><span class="p">(</span><span class="s1">&#39;bars&#39;</span><span class="p">,</span> <span class="nx">BarMapper</span><span class="o">::</span><span class="na">CLASS</span><span class="p">)</span>
+            <span class="o">-&gt;</span><span class="na">ignoreCase</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table>
+
+<p>With that in place, a native value of 'foo' match to a foreign value of 'FOO'
+when Atlas is stitching together related records.</p>
+<h2 id="simple-where-conditions">Simple WHERE Conditions</h2>
+<p>You may find it useful to define simple WHERE conditions on the foreign side of
+the relationship. For example, you can handle one side of a so-called
+polymorphic relationship by selecting only related records of a particular type.</p>
+<p>In the following example, a <code>comments</code> table has a <code>commentable_id</code> column as
+the foreign key value, but is restricted to "issue" values on a discriminator
+column named <code>commentable</code>.</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="x">class IssueMapper extends AbstractMapper</span>
+<span class="x">{</span>
+<span class="x">    protected function setRelated()</span>
+<span class="x">    {</span>
+<span class="x">        $this-&gt;oneToMany(&#39;comments&#39;, CommentMapper::CLASS)</span>
+<span class="x">            -&gt;on([</span>
+<span class="x">                &#39;issue_id&#39; =&gt; &#39;commentable_id&#39;</span>
+<span class="x">            ])</span>
+<span class="x">            -&gt;where(&#39;commentable = ?&#39;, &#39;issue&#39;);</span>
+<span class="x">    }</span>
+<span class="x">}</span>
+</pre></div>
+</td></tr></table>
+
+<p>(These conditions will be honored by <code>MapperSelect::*joinWith()</code> as well.)</p>
+                
+                  
+                
+              
+              
+                
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../getting-started/" title="Getting Started" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Getting Started
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../reading/" title="Reading Records and RecordSets" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Reading Records and RecordSets
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="http://www.mkdocs.org" title="MkDocs">MkDocs</a>
+        and
+        <a href="http://squidfunk.github.io/mkdocs-material/" title="Material for MkDocs">
+          Material for MkDocs</a>
+      </div>
+      
+        
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../assets/javascripts/application-c35428f87f.js"></script>
+      
+      
+      <script>app.initialize({url:{base:".."}})</script>
+      
+    
+    
+      
+    
+  </body>
+</html>
