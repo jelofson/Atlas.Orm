@@ -1,0 +1,426 @@
+
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+      
+      
+        <link rel="shortcut icon" href="./assets/images/favicon.png">
+      
+      <meta name="generator" content="mkdocs-0.16.3, mkdocs-material-1.7.4">
+    
+    
+      
+        <title>Atlas ORM Documentation</title>
+      
+    
+    
+      <script src="./assets/javascripts/modernizr-1df76c4e58.js"></script>
+    
+    
+      <link rel="stylesheet" href="./assets/stylesheets/application-769c285a91.css">
+      
+    
+    
+      
+        
+        
+        
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    
+    
+    
+  </head>
+  
+  
+  
+  
+    <body>
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="drawer">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="search">
+    <label class="md-overlay" data-md-component="overlay" for="drawer"></label>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <a href="." title="Atlas ORM Documentation" class="md-icon md-icon--home md-header-nav__button">
+          </a>
+        
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <span class="md-flex__ellipsis md-header-nav__title">
+          
+            
+              
+            
+            Home
+          
+        </span>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="search"></label>
+          
+<div class="md-search" data-md-component="search">
+  <label class="md-search__overlay" for="search"></label>
+  <div class="md-search__inner">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" required placeholder="Search" accesskey="s" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query">
+      <label class="md-icon md-search__icon" for="search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset">close</button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result" data-md-lang-search="">
+          <div class="md-search-result__meta" data-md-lang-result-none="No matching documents" data-md-lang-result-one="1 matching document" data-md-lang-result-other="# matching documents">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="drawer">
+    
+      <i class="md-icon md-icon--home md-nav__button"></i>
+    
+    Atlas ORM Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        Home
+      </label>
+    
+    <a href="." title="Home" class="md-nav__link md-nav__link--active">
+      Home
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#rationale" title="Rationale" class="md-nav__link">
+    Rationale
+  </a>
+  
+</li>
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="getting-started/" title="Getting Started" class="md-nav__link">
+      Getting Started
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="relationships/" title="Mapper Relationships" class="md-nav__link">
+      Mapper Relationships
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="reading/" title="Reading Records and RecordSets" class="md-nav__link">
+      Reading Records and RecordSets
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="records/" title="Working with Records" class="md-nav__link">
+      Working with Records
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="record-sets/" title="Working with RecordSets" class="md-nav__link">
+      Working with RecordSets
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#rationale" title="Rationale" class="md-nav__link">
+    Rationale
+  </a>
+  
+</li>
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="atlasorm">Atlas.Orm</h1>
+<blockquote>
+<p>No annotations. No migrations. No lazy loading. No data-type abstractions.</p>
+</blockquote>
+<p>Atlas is a <a href="http://martinfowler.com/eaaCatalog/dataMapper.html">data mapper</a>
+implementation for your <strong>persistence model</strong> (<em>not</em> your domain model).</p>
+<p>As such, Atlas uses the term "record" to indicate that its objects are <em>not</em>
+domain entities. Note that an Atlas record is a <em>passive</em> record, not an <a href="http://martinfowler.com/eaaCatalog/activeRecord.html">active
+record</a>; it is
+disconnected from the database. Use Atlas records as a way to populate your
+domain entities, or use them directly for simple data source interactions.</p>
+<p>Atlas is stable for production use. Please send bug reports and pull requests!</p>
+<h2 id="rationale">Rationale</h2>
+<p>(Or, "Why does Atlas exist?")</p>
+<p>I wanted an alternative to Active Record that would allow you to get started
+about as easily as Active Record for your <em>persistence</em> model, and then refactor
+more easily towards a richer <em>domain</em> model as needed.</p>
+<p>Using a table data gateway for the underlying table Rows, then composing them
+into Records and RecordSets via a data mapper, does the trick. As you begin to
+need simple behaviors, you can add them to the Record and RecordSet persistence
+model objects. (Rows do not have behavior.) Your domain logic layer (e.g. a
+service layer) can then use them as needed.</p>
+<p>However, per <a href="http://www.mehdi-khalili.com/orm-anti-patterns-part-4-persistence-domain-model">this article from Mehdi Khalili</a>, the target end-state for
+your modeling should eventually move toward "Domain Model composed of
+Persistence Model". That is, the domain Entity and Aggregate classes might use
+data source Records and RecordSets internally, but will not expose them. They
+can manipulate the persistence model objects internally as much as they wish.
+E.g., an Entity might have a <code>getAddress()</code>method and read from the internal
+Record (which in turn reads from its internal Row or Related objects).
+Alternatively, the end state might be "DDD on top of ORM" where Repositories map
+the persistence model objects to domain Entities, Value Objects, and Aggregates.</p>
+<p>A persistence model alone should get you a long way, especially at the beginning
+of a project. Even so, the Row, Record, and RecordSet objects are disconnected
+from the database, which should make the refactoring process a lot cleaner than
+with Active Record.</p>
+<p>Other rationalizations, essentially based around things I <em>do not</em> want in an
+ORM:</p>
+<ul>
+<li>
+<p>No annotations. I want the code to be in code, not in comments.</p>
+</li>
+<li>
+<p>No migrations or other table-modification logic. Many ORMs read the PHP objects
+and then create or modify tables from them. I want the persistence system to be
+a <em>model</em> of the schema, not a <em>creator</em> of it. If I need a migration, I'll use
+a tool specifically for migrations.</p>
+</li>
+<li>
+<p>No lazy-loading. Lazy-loading is seductive but eventually is more trouble than
+it's worth; I don't want it to be available at all, so that it cannot accidently
+be invoked.</p>
+</li>
+<li>
+<p>No data-type abstractions. I used to think data-type abstraction was great,
+but it turns out to be another thing that's just not worth the cost. I want the
+actual underlying database types to be exposed and available as much as
+possible.</p>
+</li>
+</ul>
+<p>Possible deal-breakers for potential users:</p>
+<ul>
+<li>
+<p>Atlas uses code generation, though only in a very limited way. I'm not a fan
+of code generation myself, but it turns out to be useful for building the SQL
+table classes. Each table is described as a PHP class, one that just returns
+things like the table name, the column names, etc. That's the only class that
+really gets generated by Atlas; the others are just empty extensions of parent
+classes.</p>
+</li>
+<li>
+<p>Atlas uses base Row, Record, and RecordSet classes, instead of plain-old PHP
+objects. If this were a domain modeling system, a base class would be
+unacceptable. Because Atlas is a <em>persistence</em> modeling system, I think a base
+class is less objectionable, but for some people that's going to be a real
+problem.</p>
+</li>
+</ul>
+<p>Finally, Atlas supports <strong>composite primary keys</strong> and <strong>composite foreign
+keys.</strong> Performance in these cases is sure to be slower, but it is in fact
+supported.</p>
+                
+                  
+                
+              
+              
+                
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+        
+          <a href="getting-started/" title="Getting Started" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Getting Started
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="http://www.mkdocs.org" title="MkDocs">MkDocs</a>
+        and
+        <a href="http://squidfunk.github.io/mkdocs-material/" title="Material for MkDocs">
+          Material for MkDocs</a>
+      </div>
+      
+        
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="./assets/javascripts/application-c35428f87f.js"></script>
+      
+      
+      <script>app.initialize({url:{base:"."}})</script>
+      
+    
+    
+      
+    
+  </body>
+</html>
