@@ -228,15 +228,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#array-access" title="Array Access" class="md-nav__link">
-    Array Access
+  <a href="#appending-records-to-a-recordset" title="Appending Records to a RecordSet" class="md-nav__link">
+    Appending Records to a RecordSet
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#appending-records-to-a-recordset" title="Appending Records to a RecordSet" class="md-nav__link">
-    Appending Records to a RecordSet
+  <a href="#array-access" title="Array Access" class="md-nav__link">
+    Array Access
   </a>
   
 </li>
@@ -340,15 +340,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#array-access" title="Array Access" class="md-nav__link">
-    Array Access
+  <a href="#appending-records-to-a-recordset" title="Appending Records to a RecordSet" class="md-nav__link">
+    Appending Records to a RecordSet
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#appending-records-to-a-recordset" title="Appending Records to a RecordSet" class="md-nav__link">
-    Appending Records to a RecordSet
+  <a href="#array-access" title="Array Access" class="md-nav__link">
+    Array Access
   </a>
   
 </li>
@@ -388,29 +388,6 @@
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="cp">&lt;?php</span>
 <span class="nv">$threadRecordSet</span> <span class="o">=</span> <span class="nv">$atlas</span><span class="o">-&gt;</span><span class="na">newRecordSet</span><span class="p">(</span><span class="nx">ThreadMapper</span><span class="o">::</span><span class="na">CLASS</span><span class="p">);</span>
-</pre></div>
-</td></tr></table>
-
-<h2 id="array-access">Array Access</h2>
-<p>The RecordSet also acts as an array, so you can get/set/unset Records by their
-sequential keys in the RecordSet.</p>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="cp">&lt;?php</span>
-<span class="c1">// address the second record in the set</span>
-<span class="nv">$threadRecordSet</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-&gt;</span><span class="na">title</span> <span class="o">=</span> <span class="s1">&#39;Changed Title&#39;</span><span class="p">;</span>
-
-<span class="c1">// unset the first record in the set</span>
-<span class="nb">unset</span><span class="p">(</span><span class="nv">$threadRecordSet</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
-
-<span class="c1">// push a new record onto the set</span>
-<span class="nv">$threadRecordSet</span><span class="p">[]</span> <span class="o">=</span> <span class="nv">$atlas</span><span class="o">-&gt;</span><span class="na">newRecord</span><span class="p">(</span><span class="nx">ThreadMapper</span><span class="o">::</span><span class="na">CLASS</span><span class="p">);</span>
 </pre></div>
 </td></tr></table>
 
@@ -471,6 +448,29 @@ data you want to initially populate into the Record:</p>
 
 <span class="c1">// Or persist the thread</span>
 <span class="nv">$atlas</span><span class="o">-&gt;</span><span class="na">persist</span><span class="p">(</span><span class="nv">$thread</span><span class="p">);</span>
+</pre></div>
+</td></tr></table>
+
+<h2 id="array-access">Array Access</h2>
+<p>The RecordSet also acts as an array, so you can get/set/unset Records by their
+sequential keys in the RecordSet.</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="c1">// address the second record in the set</span>
+<span class="nv">$threadRecordSet</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-&gt;</span><span class="na">title</span> <span class="o">=</span> <span class="s1">&#39;Changed Title&#39;</span><span class="p">;</span>
+
+<span class="c1">// unset the first record in the set</span>
+<span class="nb">unset</span><span class="p">(</span><span class="nv">$threadRecordSet</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+
+<span class="c1">// push a new record onto the set</span>
+<span class="nv">$threadRecordSet</span><span class="p">[]</span> <span class="o">=</span> <span class="nv">$atlas</span><span class="o">-&gt;</span><span class="na">newRecord</span><span class="p">(</span><span class="nx">ThreadMapper</span><span class="o">::</span><span class="na">CLASS</span><span class="p">);</span>
 </pre></div>
 </td></tr></table>
 
