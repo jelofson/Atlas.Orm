@@ -402,8 +402,10 @@ properties, or pass an array of initial data to populate into the Record.</p>
 
 <p>You can assign a value via a property, which maps to a column name.</p>
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="x">$date = new \DateTime();</span>
-<span class="x">$thread-&gt;date_added = $date-&gt;format(&#39;Y-m-d H:i:s&#39;);</span>
+2
+3</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="nv">$date</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\DateTime</span><span class="p">();</span>
+<span class="nv">$thread</span><span class="o">-&gt;</span><span class="na">date_added</span> <span class="o">=</span> <span class="nv">$date</span><span class="o">-&gt;</span><span class="na">format</span><span class="p">(</span><span class="s1">&#39;Y-m-d H:i:s&#39;</span><span class="p">);</span>
 </pre></div>
 </td></tr></table>
 

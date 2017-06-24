@@ -261,6 +261,19 @@
     Record Events
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#available-events" title="Available Events" class="md-nav__link">
+    Available Events
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
       
@@ -309,6 +322,19 @@
     Record Events
   </a>
   
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#available-events" title="Available Events" class="md-nav__link">
+    Available Events
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
       
@@ -328,6 +354,13 @@
                 
                 <h1 id="events">Events</h1>
 <h2 id="record-events">Record Events</h2>
+<p>There are several events that will automatically be called when interacting with a
+Record object. If you used the Atlas CLI tool with the <code>--full</code> option, a
+MapperEvents class will be created for you. For example, <code>ThreadMapperEvents.php</code>.
+With this class, you can override any of the available mapper events.</p>
+<h3 id="available-events">Available Events</h3>
+<p>The <code>insert()</code>, <code>update()</code>, and <code>delete()</code> methods all have 3 events associated
+with them. A <code>before*()</code>, a <code>modify*()</code>, and an <code>after*()</code>.</p>
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -360,7 +393,72 @@
 30
 31
 32
-33</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="cp">&lt;?php</span>
+33
+34
+35
+36</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="c1">// Runs before the Insert object is created</span>
+<span class="nx">beforeInsert</span><span class="p">(</span><span class="nx">MapperInterface</span> <span class="nv">$mapper</span><span class="p">,</span> <span class="nx">RecordInterface</span> <span class="nv">$record</span><span class="p">)</span>
+
+<span class="c1">// Runs after the Insert object is created, but before it is executed</span>
+<span class="nx">modifyInsert</span><span class="p">(</span><span class="nx">MapperInterface</span> <span class="nv">$mapper</span><span class="p">,</span> <span class="nx">RecordInterface</span> <span class="nv">$record</span><span class="p">,</span> <span class="nx">Insert</span> <span class="nv">$insert</span><span class="p">)</span>
+
+<span class="c1">// Runs after the Insert object is executed</span>
+<span class="nx">afterInsert</span><span class="p">(</span><span class="nx">MapperInterface</span> <span class="nv">$mapper</span><span class="p">,</span>
+            <span class="nx">RecordInterface</span> <span class="nv">$record</span><span class="p">,</span>
+            <span class="nx">Insert</span> <span class="nv">$insert</span><span class="p">,</span>
+            <span class="nx">PDOStatement</span> <span class="nv">$pdoStatement</span><span class="p">)</span>
+
+<span class="c1">// Runs before the Update object is created</span>
+<span class="nx">beforeUpdate</span><span class="p">(</span><span class="nx">MapperInterface</span> <span class="nv">$mapper</span><span class="p">,</span> <span class="nx">RecordInterface</span> <span class="nv">$record</span><span class="p">)</span>
+
+<span class="c1">// Runs after the Update object is created, but before it is executed</span>
+<span class="nx">modifyUpdate</span><span class="p">(</span><span class="nx">MapperInterface</span> <span class="nv">$mapper</span><span class="p">,</span> <span class="nx">RecordInterface</span> <span class="nv">$record</span><span class="p">,</span> <span class="nx">Update</span> <span class="nv">$update</span><span class="p">)</span>
+
+<span class="c1">// Runs after the Update object is executed</span>
+<span class="nx">afterUpdate</span><span class="p">(</span><span class="nx">MapperInterface</span> <span class="nv">$mapper</span><span class="p">,</span>
+            <span class="nx">RecordInterface</span> <span class="nv">$record</span><span class="p">,</span>
+            <span class="nx">Update</span> <span class="nv">$update</span><span class="p">,</span>
+            <span class="nx">PDOStatement</span> <span class="nv">$pdoStatement</span><span class="p">)</span>
+
+<span class="c1">// Runs before the Delete object is created</span>
+<span class="nx">beforeDelete</span><span class="p">(</span><span class="nx">MapperInterface</span> <span class="nv">$mapper</span><span class="p">,</span> <span class="nx">RecordInterface</span> <span class="nv">$record</span><span class="p">)</span>
+
+<span class="c1">// Runs after the Delete object is created, but before it is executed</span>
+<span class="nx">modifyDelete</span><span class="p">(</span><span class="nx">MapperInterface</span> <span class="nv">$mapper</span><span class="p">,</span> <span class="nx">RecordInterface</span> <span class="nv">$record</span><span class="p">,</span> <span class="nx">Delete</span> <span class="nv">$delete</span><span class="p">)</span>
+
+<span class="c1">// Runs after the Delete object is executed</span>
+<span class="nx">afterDelete</span><span class="p">(</span><span class="nx">MapperInterface</span> <span class="nv">$mapper</span><span class="p">,</span>
+            <span class="nx">RecordInterface</span> <span class="nv">$record</span><span class="p">,</span>
+            <span class="nx">Delete</span> <span class="nv">$delete</span><span class="p">,</span>
+            <span class="nx">PDOStatement</span> <span class="nv">$pdoStatement</span><span class="p">)</span>
+</pre></div>
+</td></tr></table>
+
+<p>Here is a simple example with the assumption that the Record object has a
+<code>validate()</code> method and a <code>getErrors()</code> method. See the section on <a href="../logic/">Adding Logic
+to Records and RecordSets</a>.</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="cp">&lt;?php</span>
 <span class="k">namespace</span> <span class="nx">Blog\DataSource\Posts</span><span class="p">;</span>
 
 <span class="k">use</span> <span class="nx">Atlas\Orm\Mapper\MapperEvents</span><span class="p">;</span>
@@ -375,22 +473,31 @@
 <span class="p">{</span>
     <span class="k">public</span> <span class="k">function</span> <span class="nf">beforeUpdate</span><span class="p">(</span><span class="nx">MapperInterface</span> <span class="nv">$mapper</span><span class="p">,</span> <span class="nx">RecordInterface</span> <span class="nv">$record</span><span class="p">)</span>
     <span class="p">{</span>
-        <span class="c1">// Validate the record and throw an exception if not valid.</span>
-        <span class="nv">$required</span> <span class="o">=</span> <span class="p">[</span>
-            <span class="s1">&#39;title&#39;</span><span class="o">=&gt;</span><span class="s1">&#39;Post title&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;body&#39;</span><span class="o">=&gt;</span><span class="s1">&#39;Post body&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;author_id&#39;</span><span class="o">=&gt;</span><span class="s1">&#39;Author&#39;</span>
-        <span class="p">];</span>
-        <span class="k">foreach</span> <span class="p">(</span><span class="nv">$required</span> <span class="k">as</span> <span class="nv">$field</span><span class="o">=&gt;</span><span class="nv">$label</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">if</span> <span class="p">(</span><span class="o">!</span> <span class="nv">$record</span><span class="o">-&gt;</span><span class="nv">$field</span><span class="p">)</span> <span class="p">{</span>
-                <span class="nv">$record</span><span class="o">-&gt;</span><span class="na">addError</span><span class="p">(</span><span class="nv">$field</span><span class="p">,</span> <span class="nv">$label</span> <span class="o">.</span> <span class="s1">&#39; can not be empty&#39;</span><span class="p">);</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
-
-        <span class="k">if</span> <span class="p">(</span><span class="nb">count</span><span class="p">(</span><span class="nv">$record</span><span class="o">-&gt;</span><span class="na">getErrors</span><span class="p">())</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span> <span class="nv">$record</span><span class="o">-&gt;</span><span class="na">validate</span><span class="p">())</span>
             <span class="k">throw</span> <span class="k">new</span> <span class="nx">Exception</span><span class="p">(</span><span class="s1">&#39;Update Error&#39;</span><span class="p">);</span>
         <span class="p">}</span>
 
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table>
+
+<p>And you might have something like this in your code:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="nv">$success</span> <span class="o">=</span> <span class="nv">$atlas</span><span class="o">-&gt;</span><span class="na">update</span><span class="p">(</span><span class="nv">$post</span><span class="p">);</span>
+<span class="k">if</span> <span class="p">(</span><span class="nv">$sucess</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="s2">&quot;Post updated&quot;</span><span class="p">;</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="k">foreach</span> <span class="p">(</span><span class="nv">$post</span><span class="o">-&gt;</span><span class="na">getErrors</span> <span class="k">as</span> <span class="nv">$error</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">echo</span> <span class="nv">$error</span> <span class="o">.</span> <span class="s1">&#39;&lt;br/&gt;&#39;</span><span class="p">;</span>
     <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>

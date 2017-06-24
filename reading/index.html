@@ -755,8 +755,8 @@ which related fields to retrieve.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>When fetching a <code>manyToMany</code> relationship, you must explicitly specify
-both the association (join) table AND the <code>manyToMany</code> table. Additionally, you
-must specify these relationships in the correct order.</p>
+both the association (through) related AND the <code>manyToMany</code> related.
+Additionally, you must specify these relationships in the correct order.</p>
 </div>
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
@@ -771,8 +771,8 @@ must specify these relationships in the correct order.</p>
     <span class="nx">ThreadMapper</span><span class="o">::</span><span class="na">CLASS</span><span class="p">,</span>
     <span class="s1">&#39;1&#39;</span><span class="p">,</span>
     <span class="p">[</span>
-        <span class="s1">&#39;taggings&#39;</span><span class="p">,</span> <span class="c1">// specify the join table first</span>
-        <span class="s1">&#39;tags&#39;</span> <span class="c1">// then the manyToMany table</span>
+        <span class="s1">&#39;taggings&#39;</span><span class="p">,</span> <span class="c1">// specify the through first</span>
+        <span class="s1">&#39;tags&#39;</span> <span class="c1">// then the manyToMany</span>
     <span class="p">]</span>
 <span class="p">);</span>
 </pre></div>
