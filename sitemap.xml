@@ -49,4 +49,36 @@
     </url>
     
 
+    
+    <url>
+     <loc>/transactions/</loc>
+     <lastmod>2017-06-23</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>/logic/</loc>
+     <lastmod>2017-06-23</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>/events/</loc>
+     <lastmod>2017-06-23</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>/direct/</loc>
+     <lastmod>2017-06-23</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
 </urlset>

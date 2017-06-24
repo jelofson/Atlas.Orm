@@ -16,7 +16,7 @@
     
     
       
-        <title>Getting Started - Atlas ORM Documentation</title>
+        <title>Adding Logic to Records and RecordSets - Atlas ORM Documentation</title>
       
     
     
@@ -73,7 +73,7 @@
             
               
             
-            Getting Started
+            Adding Logic to Records and RecordSets
           
         </span>
       </div>
@@ -144,61 +144,11 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
-    
-      
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="toc">
-        Getting Started
-      </label>
-    
-    <a href="./" title="Getting Started" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../getting-started/" title="Getting Started" class="md-nav__link">
       Getting Started
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#installation" title="Installation" class="md-nav__link">
-    Installation
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#creating-data-source-classes" title="Creating Data Source Classes" class="md-nav__link">
-    Creating Data Source Classes
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#instantiating-atlas" title="Instantiating Atlas" class="md-nav__link">
-    Instantiating Atlas
-  </a>
-  
-</li>
-      
-      
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
     
@@ -266,11 +216,20 @@
       
       
 
+  
 
-  <li class="md-nav__item">
-    <a href="../logic/" title="Adding Logic to Records and RecordSets" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
+      
+    
+    
+    <a href="./" title="Adding Logic to Records and RecordSets" class="md-nav__link md-nav__link--active">
       Adding Logic to Records and RecordSets
     </a>
+    
   </li>
 
     
@@ -315,34 +274,6 @@
     
   
   
-    <label class="md-nav__title" for="toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#installation" title="Installation" class="md-nav__link">
-    Installation
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#creating-data-source-classes" title="Creating Data Source Classes" class="md-nav__link">
-    Creating Data Source Classes
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#instantiating-atlas" title="Instantiating Atlas" class="md-nav__link">
-    Instantiating Atlas
-  </a>
-  
-</li>
-      
-      
-      
-    </ul>
-  
 </nav>
                   </div>
                 </div>
@@ -354,40 +285,54 @@
               
                 
                 
-                <h1 id="getting-started">Getting Started</h1>
-<h2 id="installation">Installation</h2>
-<p>This package is installable and autoloadable via <a href="https://getcomposer.org/">Composer</a>
-as <a href="https://packagist.org/packages/atlas/orm">atlas/orm</a>. Add the following lines
-to your <code>composer.json</code> file, then call <code>composer update</code>.</p>
+                <h1 id="adding-custom-logic-to-records-and-recordsets">Adding Custom Logic to Records and RecordSets</h1>
+<p>Atlas makes it easy to add your own logic to both Records and RecordSets. To
+accomplish this, you need a Record class for custom Record logic, and a
+RecordSet class for custom RecordSet logic. The Atlas CLI script
+(installable via composer using <code>atlas/cli</code>), can create these classes for you,
+saving you from manually writing them.
+<a href="https://github.com/atlasphp/Atlas.Cli/blob/1.x/README.md">Atlas CLI documentation</a>
+is available on GitHub.</p>
+<p>Here is an example using the <code>atlas/cli</code> package and the <code>--full</code> option.</p>
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4
 5
-6
-7
-8</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="p">{</span>
-    <span class="nt">&quot;require&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="nt">&quot;atlas/orm&quot;</span><span class="p">:</span> <span class="s2">&quot;~1.0&quot;</span>
-    <span class="p">},</span>
-    <span class="nt">&quot;require-dev&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="nt">&quot;atlas/cli&quot;</span><span class="p">:</span> <span class="s2">&quot;~1.0&quot;</span>
-    <span class="p">}</span>
-<span class="p">}</span>
+6</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>./vendor/bin/atlas-skeleton.php \
+    --conn=/path/to/conn.php \
+    --dir=src/App/DataSource \
+    --table=threads \
+    --full \
+    App\\DataSource\\Thread
 </pre></div>
 </td></tr></table>
 
-<p>(The <code>atlas/cli</code> package provides the <code>atlas-skeleton</code> command-line tool to
-help create skeleton classes for the mapper.)</p>
-<h2 id="creating-data-source-classes">Creating Data Source Classes</h2>
-<p>You can create your data source classes by hand, but it's going to be tedious to
-do so. Instead, use the <code>atlas-skeleton</code> command to read the table information
-from the database. You can read more about that in the
-<a href="https://github.com/atlasphp/Atlas.Cli/blob/1.x/README.md">atlas/cli docs</a>.</p>
-<h2 id="instantiating-atlas">Instantiating Atlas</h2>
-<p>Create an Atlas instance using the AtlasContainer.</p>
-<p>The container accepts a <a href="http://php.net/manual/en/pdo.construct.php">PDO</a>, <a href="https://github.com/auraphp/Aura.Sql/blob/3.x/docs/getting-started.md">ExtendedPdo</a> or <a href="https://github.com/auraphp/Aura.Sql/blob/3.x/docs/connection-locator.md">ConnectionLocator</a> instance or you 
-can enter connection parameters and the container creates a connection for you.</p>
+<p>Upon completion, you will have a folder layout as follows:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10</pre></div></td><td class="code"><div class="codehilite"><pre><span></span>-- src
+   -- App
+      -- DataSource
+         -- Thread
+            -- ThreadMapper.php
+            -- ThreadMapperEvents.php
+            -- ThreadRecord.php
+            -- ThreadRecordSet.php
+            -- ThreadTable.php
+            -- ThreadTableEvents.php
+</pre></div>
+</td></tr></table>
+
+<p>Once you have a Record Class (ThreadRecord.php), you can create custom methods
+to call from your Record object.</p>
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -399,46 +344,82 @@ can enter connection parameters and the container creates a connection for you.<
  9
 10
 11
-12</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="cp">&lt;?php</span>
-<span class="nv">$atlasContainer</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">AtlasContainer</span><span class="p">(</span><span class="k">new</span> <span class="nx">PDO</span><span class="p">(</span><span class="o">...</span><span class="p">));</span>
-<span class="c1">// or</span>
-<span class="nv">$atlasContainer</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">AtlasContainer</span><span class="p">(</span><span class="k">new</span> <span class="nx">ExtendedPdo</span><span class="p">(</span><span class="o">...</span><span class="p">));</span>
-<span class="c1">// or</span>
-<span class="nv">$atlasContainer</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">AtlasContainer</span><span class="p">(</span><span class="k">new</span> <span class="nx">ConnectionLocator</span><span class="p">(</span><span class="o">...</span><span class="p">));</span>
-<span class="c1">// or</span>
-<span class="nv">$atlasContainer</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">AtlasContainer</span><span class="p">(</span>
-    <span class="s1">&#39;mysql:host=localhost;dbname=testdb&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;username&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;password&#39;</span>
-<span class="p">);</span>
+12
+13
+14
+15
+16
+17
+18
+19</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="k">namespace</span> <span class="nx">App\DataSource\Thread</span><span class="p">;</span>
+
+<span class="k">use</span> <span class="nx">Atlas\Orm\Mapper\Record</span><span class="p">;</span>
+
+<span class="sd">/**</span>
+<span class="sd"> * @inheritdoc</span>
+<span class="sd"> */</span>
+<span class="k">class</span> <span class="nc">ThreadRecord</span> <span class="k">extends</span> <span class="nx">Record</span>
+<span class="p">{</span>
+    <span class="c1">// Format the date_created property</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">formatDate</span><span class="p">(</span><span class="nv">$format</span> <span class="o">=</span> <span class="s1">&#39;M jS, Y&#39;</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="nv">$dateTime</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\DateTime</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">date_created</span><span class="p">);</span>
+        <span class="k">return</span> <span class="nv">$dateTime</span><span class="o">-&gt;</span><span class="na">format</span><span class="p">(</span><span class="nv">$format</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="nv">$thread</span> <span class="o">=</span> <span class="nv">$atlas</span><span class="o">-&gt;</span><span class="na">fetchRecord</span><span class="p">(</span><span class="nx">ThreadMapper</span><span class="o">::</span><span class="na">CLASS</span><span class="p">,</span> <span class="nv">$id</span><span class="p">);</span>
+<span class="k">echo</span> <span class="nv">$thread</span><span class="o">-&gt;</span><span class="na">formatDate</span><span class="p">();</span> <span class="c1">// outputs something like `Aug 21st, 2017`</span>
 </pre></div>
 </td></tr></table>
 
-<p>Next, set the available mapper classes into the container.</p>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="cp">&lt;?php</span>
-<span class="nv">$atlasContainer</span><span class="o">-&gt;</span><span class="na">setMappers</span><span class="p">([</span>
-    <span class="nx">AuthorMapper</span><span class="o">::</span><span class="na">CLASS</span><span class="p">,</span>
-    <span class="nx">ReplyMapper</span><span class="o">::</span><span class="na">CLASS</span><span class="p">,</span>
-    <span class="nx">SummaryMapper</span><span class="o">::</span><span class="na">CLASS</span><span class="p">,</span>
-    <span class="nx">TagMapper</span><span class="o">::</span><span class="na">CLASS</span><span class="p">,</span>
-    <span class="nx">ThreadMapper</span><span class="o">::</span><span class="na">CLASS</span><span class="p">,</span>
-    <span class="nx">TaggingMapper</span><span class="o">::</span><span class="na">CLASS</span><span class="p">,</span>
-<span class="p">]);</span>
-</pre></div>
-</td></tr></table>
+<p>The same concept is available for RecordSets using the RecordSet class. In our
+example <code>ThreadRecordSet.php</code>.</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="k">namespace</span> <span class="nx">App\DataSource\Thread</span><span class="p">;</span>
 
-<p>Finally, get back the Atlas instance out of the container.</p>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="cp">&lt;?php</span>
-<span class="nv">$atlas</span> <span class="o">=</span> <span class="nv">$atlasContainer</span><span class="o">-&gt;</span><span class="na">getAtlas</span><span class="p">();</span>
+<span class="k">use</span> <span class="nx">Atlas\Orm\Mapper\RecordSet</span><span class="p">;</span>
+
+<span class="sd">/**</span>
+<span class="sd"> * @inheritdoc</span>
+<span class="sd"> */</span>
+<span class="k">class</span> <span class="nc">ThreadRecordSet</span> <span class="k">extends</span> <span class="nx">RecordSet</span>
+<span class="p">{</span>
+    <span class="k">public</span> <span class="k">function</span> <span class="nf">foo</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="nv">$data</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">foreach</span> <span class="p">(</span><span class="nv">$this</span> <span class="k">as</span> <span class="nv">$record</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nv">$data</span><span class="p">[]</span> <span class="o">=</span> <span class="nv">$record</span><span class="o">-&gt;</span><span class="na">title</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="nb">implode</span><span class="p">(</span><span class="s1">&#39;; &#39;</span><span class="p">,</span> <span class="nv">$data</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="nv">$threads</span> <span class="o">=</span> <span class="nv">$atlas</span><span class="o">-&gt;</span><span class="na">fetchRecordSet</span><span class="p">(</span><span class="nx">ThreadMapper</span><span class="o">::</span><span class="na">CLASS</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]);</span>
+
+<span class="k">echo</span> <span class="nv">$threads</span><span class="o">-&gt;</span><span class="na">foo</span><span class="p">();</span>
 </pre></div>
 </td></tr></table>
                 
@@ -459,7 +440,7 @@ can enter connection parameters and the container creates a connection for you.<
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href=".." title="Home" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../transactions/" title="Transactions (Unit of Work)" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -468,19 +449,19 @@ can enter connection parameters and the container creates a connection for you.<
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Home
+                Transactions (Unit of Work)
               </span>
             </div>
           </a>
         
         
-          <a href="../relationships/" title="Mapper Relationships" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../events/" title="Events" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Mapper Relationships
+                Events
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

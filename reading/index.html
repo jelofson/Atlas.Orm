@@ -197,30 +197,62 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#reading-a-record" title="Reading a Record" class="md-nav__link">
-    Reading a Record
+  <a href="#fetching-a-record" title="Fetching a Record" class="md-nav__link">
+    Fetching a Record
   </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#accessingreading-record-data" title="Accessing/Reading Record Data" class="md-nav__link">
+    Accessing/Reading Record Data
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#reading-a-recordset" title="Reading A RecordSet" class="md-nav__link">
-    Reading A RecordSet
+  <a href="#fetching-a-recordset" title="Fetching A RecordSet" class="md-nav__link">
+    Fetching A RecordSet
   </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#accessingreading-recordset-data" title="Accessing/Reading RecordSet Data" class="md-nav__link">
+    Accessing/Reading RecordSet Data
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#reading-relateds" title="Reading Relateds" class="md-nav__link">
-    Reading Relateds
+  <a href="#fetching-related-records" title="Fetching Related Records" class="md-nav__link">
+    Fetching Related Records
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#accessingreading-related-data" title="Accessing/Reading Related Data" class="md-nav__link">
+    Accessing/Reading Related Data
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#readingaccessing-data" title="Reading/Accessing Data" class="md-nav__link">
-    Reading/Accessing Data
-  </a>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -271,6 +303,54 @@
   </li>
 
     
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../transactions/" title="Transactions (Unit of Work)" class="md-nav__link">
+      Transactions (Unit of Work)
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../logic/" title="Adding Logic to Records and RecordSets" class="md-nav__link">
+      Adding Logic to Records and RecordSets
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../events/" title="Events" class="md-nav__link">
+      Events
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../direct/" title="Direct Queries" class="md-nav__link">
+      Direct Queries
+    </a>
+  </li>
+
+    
   </ul>
 </nav>
                   </div>
@@ -292,30 +372,62 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#reading-a-record" title="Reading a Record" class="md-nav__link">
-    Reading a Record
+  <a href="#fetching-a-record" title="Fetching a Record" class="md-nav__link">
+    Fetching a Record
   </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#accessingreading-record-data" title="Accessing/Reading Record Data" class="md-nav__link">
+    Accessing/Reading Record Data
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#reading-a-recordset" title="Reading A RecordSet" class="md-nav__link">
-    Reading A RecordSet
+  <a href="#fetching-a-recordset" title="Fetching A RecordSet" class="md-nav__link">
+    Fetching A RecordSet
   </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#accessingreading-recordset-data" title="Accessing/Reading RecordSet Data" class="md-nav__link">
+    Accessing/Reading RecordSet Data
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#reading-relateds" title="Reading Relateds" class="md-nav__link">
-    Reading Relateds
+  <a href="#fetching-related-records" title="Fetching Related Records" class="md-nav__link">
+    Fetching Related Records
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#accessingreading-related-data" title="Accessing/Reading Related Data" class="md-nav__link">
+    Accessing/Reading Related Data
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#readingaccessing-data" title="Reading/Accessing Data" class="md-nav__link">
-    Reading/Accessing Data
-  </a>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -348,9 +460,9 @@
               
                 
                 
-                <h1 id="reading-records-and-recordsets">Reading Records and RecordSets</h1>
+                <h1 id="fetching-records-and-recordsets">Fetching Records and RecordSets</h1>
 <p>Use Atlas to retrieve a single Record, or many Records in a RecordSet, from the database.</p>
-<h2 id="reading-a-record">Reading a Record</h2>
+<h2 id="fetching-a-record">Fetching a Record</h2>
 <p>Use the <code>fetchRecord()</code> method to retrieve a single Record. It can be called
 either by primary key, or with a <code>select()</code> query.</p>
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
@@ -379,46 +491,65 @@ either by primary key, or with a <code>select()</code> query.</p>
 </pre></div>
 </td></tr></table>
 
-<p>Use the <code>fetchRecordBy()</code> method to find a record by one or more equality pairs.</p>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6
-7
-8</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="cp">&lt;?php</span>
-<span class="c1">// If more than one is found, the first match will be returned</span>
-<span class="nv">$threadRecord</span> <span class="o">=</span> <span class="nv">$atlas</span><span class="o">-&gt;</span><span class="na">fetchRecordBy</span><span class="p">(</span><span class="nx">ThreadMapper</span><span class="o">::</span><span class="na">CLASS</span><span class="p">,</span>
-    <span class="p">[</span>
-        <span class="s1">&#39;author_id&#39;</span><span class="o">=&gt;</span><span class="mi">3</span><span class="p">,</span>
-        <span class="s1">&#39;published&#39;</span><span class="o">=&gt;</span><span class="mi">1</span>
-    <span class="p">]</span>
-<span class="p">);</span>
-</pre></div>
-</td></tr></table>
-
-<p>The example above is equivalent to...</p>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="cp">&lt;?php</span>
-<span class="nv">$threadRecord</span> <span class="o">=</span> <span class="nv">$atlas</span><span class="o">-&gt;</span><span class="na">select</span><span class="p">(</span><span class="nx">ThreadMapper</span><span class="o">::</span><span class="na">CLASS</span><span class="p">)</span>
-    <span class="o">-&gt;</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;author_id=&gt;&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
-    <span class="o">-&gt;</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;published=?&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-    <span class="o">-&gt;</span><span class="na">fetchRecord</span><span class="p">();</span>
-</pre></div>
-</td></tr></table>
-
-<div class="admonition note">
-<p class="admonition-title">Note</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
 <p>The <code>select()</code> variation gives you access to all the underlying
-SQL query methods. See <a href="https://github.com/auraphp/Aura.SqlQuery/blob/3.x/docs/select.md">Aura\SqlQuery</a> 
+SQL query methods. See <a href="https://github.com/auraphp/Aura.SqlQuery/blob/3.x/docs/select.md">Aura\SqlQuery</a>
 for more information.</p>
 </div>
-<p>If <code>fetchRecord()</code> or  <code>fetchRecordBy()</code> does not find a match, it will return <code>false</code>.</p>
-<h2 id="reading-a-recordset">Reading A RecordSet</h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If <code>fetchRecord()</code> does not find a match, it will return <code>false</code>.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If using the <code>select()</code> variation with the <code>cols()</code> method, be sure to include
+the table's primary key column(s) if you are fetching a Record. If using one
+of the other <code>fetch*()</code> methods outlined in the chapter on Direct Queries,
+then this isn't necessary. See below.</p>
+</div>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="c1">// must include the primary key column (and author_id because of the</span>
+<span class="c1">// where clause)</span>
+<span class="nv">$threadRecord</span> <span class="o">=</span> <span class="nv">$atlas</span>
+    <span class="o">-&gt;</span><span class="na">select</span><span class="p">(</span><span class="nx">ThreadMapper</span><span class="o">::</span><span class="na">class</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;author_id = ?&#39;</span><span class="p">,</span> <span class="s1">&#39;2&#39;</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">cols</span><span class="p">([</span><span class="s1">&#39;thread_id&#39;</span><span class="p">,</span> <span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;author_id&#39;</span><span class="p">])</span>
+    <span class="o">-&gt;</span><span class="na">fetchRecord</span><span class="p">();</span>
+
+<span class="c1">// No need to include the primary key column</span>
+<span class="nv">$threadRecord</span> <span class="o">=</span> <span class="nv">$atlas</span>
+    <span class="o">-&gt;</span><span class="na">select</span><span class="p">(</span><span class="nx">ThreadMapper</span><span class="o">::</span><span class="na">class</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;author_id = ?&#39;</span><span class="p">,</span> <span class="s1">&#39;2&#39;</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">cols</span><span class="p">([</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;author_id&#39;</span><span class="p">])</span>
+    <span class="o">-&gt;</span><span class="na">fetchOne</span><span class="p">();</span>
+</pre></div>
+</td></tr></table>
+
+<h3 id="accessingreading-record-data">Accessing/Reading Record Data</h3>
+<p>Once you have a Record, you can access the columns via properties on the Record.
+Assume a database column called <code>title</code>.</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="k">echo</span> <span class="nv">$thread</span><span class="o">-&gt;</span><span class="na">title</span><span class="p">;</span>
+</pre></div>
+</td></tr></table>
+
+<h2 id="fetching-a-recordset">Fetching A RecordSet</h2>
 <p>The <code>fetchRecordSet()</code> method works the same as <code>fetchRecord()</code>, but for
 multiple Records.  It can be called either with primary keys, or with a
 <code>select()</code> query.</p>
@@ -467,47 +598,20 @@ multiple Records.  It can be called either with primary keys, or with a
 </pre></div>
 </td></tr></table>
 
-<p>Use the <code>fetchRecordSetBy()</code> method to find a RecordSet by one or more equality pairs.</p>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6
-7</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="cp">&lt;?php</span>
-<span class="nv">$threadRecords</span> <span class="o">=</span> <span class="nv">$atlas</span><span class="o">-&gt;</span><span class="na">fetchRecordSetBy</span><span class="p">(</span><span class="nx">ThreadMapper</span><span class="o">::</span><span class="na">CLASS</span><span class="p">,</span>
-    <span class="p">[</span>
-        <span class="s1">&#39;author_id&#39;</span><span class="o">=&gt;</span><span class="mi">3</span><span class="p">,</span>
-        <span class="s1">&#39;published&#39;</span><span class="o">=&gt;</span><span class="mi">1</span>
-    <span class="p">]</span>
-<span class="p">);</span>
-</pre></div>
-</td></tr></table>
-
-<p>The example above is equivalent to...</p>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="cp">&lt;?php</span>
-<span class="nv">$threadRecords</span> <span class="o">=</span> <span class="nv">$atlas</span><span class="o">-&gt;</span><span class="na">select</span><span class="p">(</span><span class="nx">ThreadMapper</span><span class="o">::</span><span class="na">CLASS</span><span class="p">)</span>
-    <span class="o">-&gt;</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;author_id=&gt;&#39;</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
-    <span class="o">-&gt;</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;published=?&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-    <span class="o">-&gt;</span><span class="na">fetchRecordSet</span><span class="p">();</span>
-</pre></div>
-</td></tr></table>
-
-<div class="admonition note">
-<p class="admonition-title">Note</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
 <p>The <code>select()</code> variation gives you access to all the underlying
 SQL query methods. See <a href="https://github.com/auraphp/Aura.SqlQuery/blob/3.x/docs/select.md">Aura\SqlQuery</a>
 for more information.</p>
 </div>
-<p>If <code>fetchRecordSet()</code> or <code>fetchRecordSetBy()</code> do not find any matches, they will
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If <code>fetchRecordSet()</code> does not find any matches, it will
 return an empty array. This is important as you cannot call RecordSet methods
 (see later in the documentation) such as <code>appendNew()</code> or <code>getArrayCopy()</code> on
 an empty array. In these situations, you must test for the empty array, and then
-instantiate a new RecordSet, if necessary.</p>
+instantiate a new RecordSet, if necessary. See below.</p>
+</div>
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -530,9 +634,36 @@ instantiate a new RecordSet, if necessary.</p>
 </pre></div>
 </td></tr></table>
 
-<h2 id="reading-relateds">Reading Relateds</h2>
+<h3 id="accessingreading-recordset-data">Accessing/Reading RecordSet Data</h3>
+<p>RecordSets act as arrays of Records. As such, you can easily iterate over the
+RecordSet and access the Records individually.</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="c1">// fetch the top 100 threads</span>
+<span class="nv">$threadRecordSet</span> <span class="o">=</span> <span class="nv">$atlas</span>
+    <span class="o">-&gt;</span><span class="na">select</span><span class="p">(</span><span class="nx">ThreadMapper</span><span class="o">::</span><span class="na">CLASS</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">orderBy</span><span class="p">([</span><span class="s1">&#39;thread_id DESC&#39;</span><span class="p">])</span>
+    <span class="o">-&gt;</span><span class="na">limit</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">fetchRecordSet</span><span class="p">();</span>
+
+<span class="k">foreach</span> <span class="p">(</span><span class="nv">$threadRecordSet</span> <span class="k">as</span> <span class="nv">$threadRecord</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">echo</span> <span class="nv">$threadRecord</span><span class="o">-&gt;</span><span class="na">title</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</td></tr></table>
+
+<h2 id="fetching-related-records">Fetching Related Records</h2>
 <p>Any relationships that are set in the Mapper will appear as <code>NULL</code> in the Record
-object.  Related data will only be populated if it explicitly requested as part
+object.  Related data will only be populated if it is explicitly requested as part
 of the fetch or select.</p>
 <p>On a <code>fetch*()</code>, load relateds using a third argument: an array specifying
 which related fields to retrieve.</p>
@@ -578,6 +709,49 @@ which related fields to retrieve.</p>
 </pre></div>
 </td></tr></table>
 
+<p>When using the <code>select()</code> variation, load relateds using the <code>with()</code> method:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="nv">$threadRecord</span> <span class="o">=</span> <span class="nv">$atlas</span>
+    <span class="o">-&gt;</span><span class="na">select</span><span class="p">(</span><span class="nx">ThreadMapper</span><span class="o">::</span><span class="na">class</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;thread_id = ?&#39;</span><span class="p">,</span> <span class="s1">&#39;1&#39;</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">with</span><span class="p">([</span>
+        <span class="s1">&#39;author&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;summary&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;replies&#39;</span><span class="p">,</span>
+    <span class="p">])</span>
+    <span class="o">-&gt;</span><span class="na">fetchRecord</span><span class="p">();</span>
+
+<span class="nv">$threadRecordSet</span> <span class="o">=</span> <span class="nv">$atlas</span>
+    <span class="o">-&gt;</span><span class="na">select</span><span class="p">(</span><span class="nx">ThreadMapper</span><span class="o">::</span><span class="na">CLASS</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;thread_id IN (?)&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+    <span class="o">-&gt;</span><span class="na">with</span><span class="p">([</span>
+        <span class="s1">&#39;author&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;summary&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;replies&#39;</span><span class="p">,</span>
+    <span class="p">])</span>
+    <span class="o">-&gt;</span><span class="na">fetchRecordSet</span><span class="p">();</span>
+</pre></div>
+</td></tr></table>
+
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>When fetching a <code>manyToMany</code> relationship, you must explicitly specify
@@ -601,47 +775,6 @@ must specify these relationships in the correct order.</p>
         <span class="s1">&#39;tags&#39;</span> <span class="c1">// then the manyToMany table</span>
     <span class="p">]</span>
 <span class="p">);</span>
-</pre></div>
-</td></tr></table>
-
-<p>On a <code>select()</code>, load relateds using the <code>with()</code> method:</p>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="x">$threadRecord = $atlas</span>
-<span class="x">    -&gt;select(ThreadMapper::class)</span>
-<span class="x">    -&gt;where(&#39;thread_id = ?&#39;, &#39;1&#39;)</span>
-<span class="x">    -&gt;with([</span>
-<span class="x">        &#39;author&#39;,</span>
-<span class="x">        &#39;summary&#39;,</span>
-<span class="x">        &#39;replies&#39;,</span>
-<span class="x">    ])</span>
-<span class="x">    -&gt;fetchRecord();</span>
-
-<span class="x">$threadRecordSet = $atlas</span>
-<span class="x">    -&gt;select(ThreadMapper::CLASS)</span>
-<span class="x">    -&gt;where(&#39;thread_id IN (?)&#39;, [1, 2, 3])</span>
-<span class="x">    -&gt;with([</span>
-<span class="x">        &#39;author&#39;,</span>
-<span class="x">        &#39;summary&#39;,</span>
-<span class="x">        &#39;replies&#39;,</span>
-<span class="x">    ])</span>
-<span class="x">    -&gt;fetchRecordSet();</span>
 </pre></div>
 </td></tr></table>
 
@@ -715,67 +848,9 @@ that fetches the relateds:</p>
 </pre></div>
 </td></tr></table>
 
-<h2 id="readingaccessing-data">Reading/Accessing Data</h2>
-<p>Column names and relationship names are mapped to properties of a Record.
-Relationships must be explicitly requested or their value will be NULL.</p>
-<p>Assume a table with the following columns:</p>
-<pre>
----------------------------------------------------------------------------
-thread_id    | title    | body    | author_id | date_added   | date_created
--------------+----------+---------+-----------+--------------+-------------
-</pre>
-
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="cp">&lt;?php</span>
-<span class="nv">$threadRecord</span> <span class="o">=</span> <span class="nv">$atlas</span><span class="o">-&gt;</span><span class="na">fetchRecord</span><span class="p">(</span>
-    <span class="nx">ThreadMapper</span><span class="o">::</span><span class="na">CLASS</span><span class="p">,</span>
-    <span class="s1">&#39;1&#39;</span>
-<span class="p">);</span>
-
-<span class="k">echo</span> <span class="nv">$threadRecord</span><span class="o">-&gt;</span><span class="na">title</span><span class="p">;</span>
-
-<span class="c1">// If there were a related named `author`, its value would be `NULL` as it was</span>
-<span class="c1">// not requests in the fetch.</span>
-<span class="nb">var_dump</span><span class="p">(</span><span class="nv">$threadRecord</span><span class="o">-&gt;</span><span class="na">author</span><span class="p">);</span> <span class="c1">// NULL</span>
-</pre></div>
-</td></tr></table>
-
-<p>By requesting the author related, you can then access its data via properties.</p>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="cp">&lt;?php</span>
-<span class="nv">$threadRecord</span> <span class="o">=</span> <span class="nv">$atlas</span><span class="o">-&gt;</span><span class="na">fetchRecord</span><span class="p">(</span>
-    <span class="nx">ThreadMapper</span><span class="o">::</span><span class="na">CLASS</span><span class="p">,</span>
-    <span class="s1">&#39;1&#39;</span><span class="p">,</span>
-    <span class="p">[</span>
-        <span class="s1">&#39;author&#39;</span>
-    <span class="p">]</span>
-<span class="p">);</span>
-
-<span class="c1">// `first_name` maps to a column name in the authors table.</span>
-<span class="k">echo</span> <span class="nv">$threadRecord</span><span class="o">-&gt;</span><span class="na">author</span><span class="o">-&gt;</span><span class="na">first_name</span><span class="p">;</span>
-</pre></div>
-</td></tr></table>
-
-<p>Relationships can be nested, but as long as a related exists, you can access its
-data.</p>
+<h3 id="accessingreading-related-data">Accessing/Reading Related Data</h3>
+<p>Accessing related data works just like accessing Record properties except instead
+of using a column name, you use the relationship name defined in the mapper.</p>
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -791,7 +866,8 @@ data.</p>
 13
 14
 15
-16</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="cp">&lt;?php</span>
+16
+17</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="cp">&lt;?php</span>
 <span class="nv">$threadRecord</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">atlas</span>
     <span class="o">-&gt;</span><span class="na">select</span><span class="p">(</span><span class="nx">ThreadMapper</span><span class="o">::</span><span class="na">class</span><span class="p">)</span>
     <span class="o">-&gt;</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;thread_id = ?&#39;</span><span class="p">,</span> <span class="nv">$threadId</span><span class="p">)</span>
@@ -804,8 +880,9 @@ data.</p>
     <span class="p">])</span>
     <span class="o">-&gt;</span><span class="na">fetchRecord</span><span class="p">();</span>
 
+<span class="c1">// Assume the author table has a column named `last_name`</span>
 <span class="k">foreach</span> <span class="p">(</span><span class="nv">$threadRecord</span><span class="o">-&gt;</span><span class="na">replies</span> <span class="k">as</span> <span class="nv">$reply</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">echo</span> <span class="nv">$reply</span><span class="o">-&gt;</span><span class="na">author</span><span class="o">-&gt;</span><span class="na">first_name</span><span class="p">;</span>
+    <span class="k">echo</span> <span class="nv">$reply</span><span class="o">-&gt;</span><span class="na">author</span><span class="o">-&gt;</span><span class="na">last_name</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </td></tr></table>

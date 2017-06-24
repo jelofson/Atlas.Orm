@@ -16,7 +16,7 @@
     
     
       
-        <title>Getting Started - Atlas ORM Documentation</title>
+        <title>Transactions (Unit of Work) - Atlas ORM Documentation</title>
       
     
     
@@ -73,7 +73,7 @@
             
               
             
-            Getting Started
+            Transactions (Unit of Work)
           
         </span>
       </div>
@@ -144,61 +144,11 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
-    
-      
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="toc">
-        Getting Started
-      </label>
-    
-    <a href="./" title="Getting Started" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../getting-started/" title="Getting Started" class="md-nav__link">
       Getting Started
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#installation" title="Installation" class="md-nav__link">
-    Installation
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#creating-data-source-classes" title="Creating Data Source Classes" class="md-nav__link">
-    Creating Data Source Classes
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#instantiating-atlas" title="Instantiating Atlas" class="md-nav__link">
-    Instantiating Atlas
-  </a>
-  
-</li>
-      
-      
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
     
@@ -254,11 +204,20 @@
       
       
 
+  
 
-  <li class="md-nav__item">
-    <a href="../transactions/" title="Transactions (Unit of Work)" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
+      
+    
+    
+    <a href="./" title="Transactions (Unit of Work)" class="md-nav__link md-nav__link--active">
       Transactions (Unit of Work)
     </a>
+    
   </li>
 
     
@@ -315,34 +274,6 @@
     
   
   
-    <label class="md-nav__title" for="toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#installation" title="Installation" class="md-nav__link">
-    Installation
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#creating-data-source-classes" title="Creating Data Source Classes" class="md-nav__link">
-    Creating Data Source Classes
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#instantiating-atlas" title="Instantiating Atlas" class="md-nav__link">
-    Instantiating Atlas
-  </a>
-  
-</li>
-      
-      
-      
-    </ul>
-  
 </nav>
                   </div>
                 </div>
@@ -354,40 +285,11 @@
               
                 
                 
-                <h1 id="getting-started">Getting Started</h1>
-<h2 id="installation">Installation</h2>
-<p>This package is installable and autoloadable via <a href="https://getcomposer.org/">Composer</a>
-as <a href="https://packagist.org/packages/atlas/orm">atlas/orm</a>. Add the following lines
-to your <code>composer.json</code> file, then call <code>composer update</code>.</p>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6
-7
-8</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="p">{</span>
-    <span class="nt">&quot;require&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="nt">&quot;atlas/orm&quot;</span><span class="p">:</span> <span class="s2">&quot;~1.0&quot;</span>
-    <span class="p">},</span>
-    <span class="nt">&quot;require-dev&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="nt">&quot;atlas/cli&quot;</span><span class="p">:</span> <span class="s2">&quot;~1.0&quot;</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</pre></div>
-</td></tr></table>
-
-<p>(The <code>atlas/cli</code> package provides the <code>atlas-skeleton</code> command-line tool to
-help create skeleton classes for the mapper.)</p>
-<h2 id="creating-data-source-classes">Creating Data Source Classes</h2>
-<p>You can create your data source classes by hand, but it's going to be tedious to
-do so. Instead, use the <code>atlas-skeleton</code> command to read the table information
-from the database. You can read more about that in the
-<a href="https://github.com/atlasphp/Atlas.Cli/blob/1.x/README.md">atlas/cli docs</a>.</p>
-<h2 id="instantiating-atlas">Instantiating Atlas</h2>
-<p>Create an Atlas instance using the AtlasContainer.</p>
-<p>The container accepts a <a href="http://php.net/manual/en/pdo.construct.php">PDO</a>, <a href="https://github.com/auraphp/Aura.Sql/blob/3.x/docs/getting-started.md">ExtendedPdo</a> or <a href="https://github.com/auraphp/Aura.Sql/blob/3.x/docs/connection-locator.md">ConnectionLocator</a> instance or you 
-can enter connection parameters and the container creates a connection for you.</p>
+                <h1 id="transactions-unit-of-work">Transactions (Unit of Work)</h1>
+<p>If you make changes to several Records, you can write them back to the database
+using a unit-of-work Transaction. You can plan for Records to be inserted,
+updated, and deleted, in whatever order you like, and then execute the entire
+transaction plan at once. Exceptions will cause a rollback.</p>
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
  2
  3
@@ -399,46 +301,54 @@ can enter connection parameters and the container creates a connection for you.<
  9
 10
 11
-12</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="cp">&lt;?php</span>
-<span class="nv">$atlasContainer</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">AtlasContainer</span><span class="p">(</span><span class="k">new</span> <span class="nx">PDO</span><span class="p">(</span><span class="o">...</span><span class="p">));</span>
-<span class="c1">// or</span>
-<span class="nv">$atlasContainer</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">AtlasContainer</span><span class="p">(</span><span class="k">new</span> <span class="nx">ExtendedPdo</span><span class="p">(</span><span class="o">...</span><span class="p">));</span>
-<span class="c1">// or</span>
-<span class="nv">$atlasContainer</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">AtlasContainer</span><span class="p">(</span><span class="k">new</span> <span class="nx">ConnectionLocator</span><span class="p">(</span><span class="o">...</span><span class="p">));</span>
-<span class="c1">// or</span>
-<span class="nv">$atlasContainer</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">AtlasContainer</span><span class="p">(</span>
-    <span class="s1">&#39;mysql:host=localhost;dbname=testdb&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;username&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;password&#39;</span>
-<span class="p">);</span>
-</pre></div>
-</td></tr></table>
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="c1">// create a transaction</span>
+<span class="nv">$transaction</span> <span class="o">=</span> <span class="nv">$atlas</span><span class="o">-&gt;</span><span class="na">newTransaction</span><span class="p">();</span>
 
-<p>Next, set the available mapper classes into the container.</p>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5
-6
-7
-8
-9</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="cp">&lt;?php</span>
-<span class="nv">$atlasContainer</span><span class="o">-&gt;</span><span class="na">setMappers</span><span class="p">([</span>
-    <span class="nx">AuthorMapper</span><span class="o">::</span><span class="na">CLASS</span><span class="p">,</span>
-    <span class="nx">ReplyMapper</span><span class="o">::</span><span class="na">CLASS</span><span class="p">,</span>
-    <span class="nx">SummaryMapper</span><span class="o">::</span><span class="na">CLASS</span><span class="p">,</span>
-    <span class="nx">TagMapper</span><span class="o">::</span><span class="na">CLASS</span><span class="p">,</span>
-    <span class="nx">ThreadMapper</span><span class="o">::</span><span class="na">CLASS</span><span class="p">,</span>
-    <span class="nx">TaggingMapper</span><span class="o">::</span><span class="na">CLASS</span><span class="p">,</span>
-<span class="p">]);</span>
-</pre></div>
-</td></tr></table>
+<span class="c1">// plan work for the transaction</span>
+<span class="nv">$transaction</span><span class="o">-&gt;</span><span class="na">insert</span><span class="p">(</span><span class="nv">$record1</span><span class="p">);</span>
+<span class="nv">$transaction</span><span class="o">-&gt;</span><span class="na">update</span><span class="p">(</span><span class="nv">$record2</span><span class="p">);</span>
+<span class="nv">$transaction</span><span class="o">-&gt;</span><span class="na">delete</span><span class="p">(</span><span class="nv">$record3</span><span class="p">);</span>
 
-<p>Finally, get back the Atlas instance out of the container.</p>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="cp">&lt;?php</span>
-<span class="nv">$atlas</span> <span class="o">=</span> <span class="nv">$atlasContainer</span><span class="o">-&gt;</span><span class="na">getAtlas</span><span class="p">();</span>
+<span class="c1">// or persist an entire record and its relateds</span>
+<span class="nv">$transaction</span><span class="o">-&gt;</span><span class="na">persist</span><span class="p">(</span><span class="nv">$record4</span><span class="p">);</span>
+
+<span class="c1">// execute the transaction plan</span>
+<span class="nv">$success</span> <span class="o">=</span> <span class="nv">$transaction</span><span class="o">-&gt;</span><span class="na">exec</span><span class="p">();</span>
+<span class="k">if</span> <span class="p">(</span><span class="nv">$success</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="k">echo</span> <span class="s2">&quot;The Transaction succeeded!&quot;</span><span class="p">;</span>
+
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+
+    <span class="c1">// get the exception that was thrown in the transaction</span>
+    <span class="nv">$e</span> <span class="o">=</span> <span class="nv">$transaction</span><span class="o">-&gt;</span><span class="na">getException</span><span class="p">();</span>
+
+    <span class="c1">// get the work element that threw the exception</span>
+    <span class="nv">$work</span> <span class="o">=</span> <span class="nv">$transaction</span><span class="o">-&gt;</span><span class="na">getFailure</span><span class="p">();</span>
+
+    <span class="c1">// some output</span>
+    <span class="k">echo</span> <span class="s2">&quot;The Transaction failed: &quot;</span><span class="p">;</span>
+    <span class="k">echo</span> <span class="nv">$work</span><span class="o">-&gt;</span><span class="na">getLabel</span><span class="p">()</span> <span class="o">.</span> <span class="s1">&#39; threw &#39;</span> <span class="o">.</span> <span class="nv">$e</span><span class="o">-&gt;</span><span class="na">getMessage</span><span class="p">();</span>
+<span class="p">}</span>
 </pre></div>
 </td></tr></table>
                 
@@ -459,7 +369,7 @@ can enter connection parameters and the container creates a connection for you.<
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href=".." title="Home" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../record-sets/" title="Working with RecordSets" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -468,19 +378,19 @@ can enter connection parameters and the container creates a connection for you.<
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Home
+                Working with RecordSets
               </span>
             </div>
           </a>
         
         
-          <a href="../relationships/" title="Mapper Relationships" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../logic/" title="Adding Logic to Records and RecordSets" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Mapper Relationships
+                Adding Logic to Records and RecordSets
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

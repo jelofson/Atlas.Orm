@@ -221,6 +221,27 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#new-recordsets" title="New RecordSets" class="md-nav__link">
+    New RecordSets
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#array-access" title="Array Access" class="md-nav__link">
+    Array Access
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#appending-records-to-a-recordset" title="Appending Records to a RecordSet" class="md-nav__link">
+    Appending Records to a RecordSet
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#searching-within-recordsets" title="Searching within RecordSets" class="md-nav__link">
     Searching within RecordSets
   </a>
@@ -234,19 +255,60 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#appending-records-to-a-recordset" title="Appending Records to a RecordSet" class="md-nav__link">
-    Appending Records to a RecordSet
-  </a>
-  
-</li>
-      
       
       
     </ul>
   
 </nav>
     
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../transactions/" title="Transactions (Unit of Work)" class="md-nav__link">
+      Transactions (Unit of Work)
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../logic/" title="Adding Logic to Records and RecordSets" class="md-nav__link">
+      Adding Logic to Records and RecordSets
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../events/" title="Events" class="md-nav__link">
+      Events
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../direct/" title="Direct Queries" class="md-nav__link">
+      Direct Queries
+    </a>
   </li>
 
     
@@ -271,6 +333,27 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#new-recordsets" title="New RecordSets" class="md-nav__link">
+    New RecordSets
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#array-access" title="Array Access" class="md-nav__link">
+    Array Access
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#appending-records-to-a-recordset" title="Appending Records to a RecordSet" class="md-nav__link">
+    Appending Records to a RecordSet
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#searching-within-recordsets" title="Searching within RecordSets" class="md-nav__link">
     Searching within RecordSets
   </a>
@@ -280,13 +363,6 @@
         <li class="md-nav__item">
   <a href="#removing-records-from-recordsets" title="Removing Records from RecordSets" class="md-nav__link">
     Removing Records from RecordSets
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#appending-records-to-a-recordset" title="Appending Records to a RecordSet" class="md-nav__link">
-    Appending Records to a RecordSet
   </a>
   
 </li>
@@ -307,15 +383,114 @@
                 
                 
                 <h1 id="working-with-recordsets">Working with RecordSets</h1>
-<h2 id="searching-within-recordsets">Searching within RecordSets</h2>
-<p>You can search for Records by their column values:</p>
+<h2 id="new-recordsets">New RecordSets</h2>
+<p>Create a new RecordSet using the <code>newRecordSet()</code> method.</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="nv">$threadRecordSet</span> <span class="o">=</span> <span class="nv">$atlas</span><span class="o">-&gt;</span><span class="na">newRecordSet</span><span class="p">(</span><span class="nx">ThreadMapper</span><span class="o">::</span><span class="na">CLASS</span><span class="p">);</span>
+</pre></div>
+</td></tr></table>
+
+<h2 id="array-access">Array Access</h2>
+<p>The RecordSet also acts as an array, so you can get/set/unset Records by their
+sequential keys in the RecordSet.</p>
 <table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
 4
 5
 6
-7</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="cp">&lt;?php</span>
+7
+8
+9</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="c1">// address the second record in the set</span>
+<span class="nv">$threadRecordSet</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-&gt;</span><span class="na">title</span> <span class="o">=</span> <span class="s1">&#39;Changed Title&#39;</span><span class="p">;</span>
+
+<span class="c1">// unset the first record in the set</span>
+<span class="nb">unset</span><span class="p">(</span><span class="nv">$threadRecordSet</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+
+<span class="c1">// push a new record onto the set</span>
+<span class="nv">$threadRecordSet</span><span class="p">[]</span> <span class="o">=</span> <span class="nv">$atlas</span><span class="o">-&gt;</span><span class="na">newRecord</span><span class="p">(</span><span class="nx">ThreadMapper</span><span class="o">::</span><span class="na">CLASS</span><span class="p">);</span>
+</pre></div>
+</td></tr></table>
+
+<h2 id="appending-records-to-a-recordset">Appending Records to a RecordSet</h2>
+<p>You can append a new Record to an existing RecordSet using <code>appendNew()</code>, optionally passing any
+data you want to initially populate into the Record:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
+2
+3
+4</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="nv">$newThread</span> <span class="o">=</span> <span class="nv">$threadRecordSet</span><span class="o">-&gt;</span><span class="na">appendNew</span><span class="p">([</span>
+    <span class="s1">&#39;title&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;New Title&#39;</span><span class="p">,</span>
+<span class="p">]);</span>
+</pre></div>
+</td></tr></table>
+
+<p>Additionally, you can append foreign Records to a native Record's relateds.</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="nv">$thread</span> <span class="o">=</span> <span class="nv">$atlas</span><span class="o">-&gt;</span><span class="na">fetchRecord</span><span class="p">(</span><span class="nx">ThreadMapper</span><span class="o">::</span><span class="na">CLASS</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="p">[</span>
+        <span class="s1">&#39;comments&#39;</span><span class="p">,</span>
+    <span class="p">]</span>
+<span class="p">);</span>
+
+<span class="c1">// Ensure we have a RecordSet to append to</span>
+<span class="k">if</span> <span class="p">(</span><span class="o">!</span> <span class="nv">$thread</span><span class="o">-&gt;</span><span class="na">comments</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nv">$thread</span><span class="o">-&gt;</span><span class="na">comments</span> <span class="o">=</span> <span class="nv">$atlas</span><span class="o">-&gt;</span><span class="na">newRecordSet</span><span class="p">(</span><span class="nx">CommentMapper</span><span class="o">::</span><span class="na">CLASS</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="nv">$comment</span> <span class="o">=</span> <span class="nv">$thread</span><span class="o">-&gt;</span><span class="na">comments</span><span class="o">-&gt;</span><span class="na">appendNew</span><span class="p">([</span>
+    <span class="s1">&#39;thread_id&#39;</span> <span class="o">=&gt;</span> <span class="nv">$thread</span><span class="o">-&gt;</span><span class="na">thread_id</span><span class="p">,</span>
+    <span class="s1">&#39;comment&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Lorem ipsum dolor sit amet...&#39;</span>
+<span class="p">]);</span>
+
+<span class="c1">// plan to insert the new comment</span>
+<span class="nv">$transaction</span><span class="o">-&gt;</span><span class="na">insert</span><span class="p">(</span><span class="nv">$comment</span><span class="p">);</span>
+
+<span class="c1">// Or persist the thread</span>
+<span class="nv">$atlas</span><span class="o">-&gt;</span><span class="na">persist</span><span class="p">(</span><span class="nv">$thread</span><span class="p">);</span>
+</pre></div>
+</td></tr></table>
+
+<h2 id="searching-within-recordsets">Searching within RecordSets</h2>
+<p>You can search for Records within an existing RecordSet by their column values:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="cp">&lt;?php</span>
+<span class="nv">$threadRecordSet</span> <span class="o">=</span> <span class="nv">$atlas</span><span class="o">-&gt;</span><span class="na">select</span><span class="p">(</span><span class="nx">ThreadMapper</span><span class="o">::</span><span class="na">CLASS</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;published=?&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="o">-&gt;</span><span class="na">fetchRecordSet</span><span class="p">();</span>
+
 <span class="c1">// returns one matching Record object from the RecordSet,</span>
 <span class="c1">// or false if there is no match</span>
 <span class="nv">$matchingRecord</span> <span class="o">=</span> <span class="nv">$threadRecordSet</span><span class="o">-&gt;</span><span class="na">getOneBy</span><span class="p">([</span><span class="s1">&#39;subject&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Subject One&#39;</span><span class="p">]);</span>
@@ -344,21 +519,12 @@ delete the Record from the database; only from the RecordSet.</p>
 </pre></div>
 </td></tr></table>
 
-<p>Note that this only removes them from the RecordSet; it does not delete them
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This only removes them from the RecordSet; it does not delete them
 from the database. If you need to delete a record from the database, see the
-section on Marking Records for Deletion.</p>
-<h2 id="appending-records-to-a-recordset">Appending Records to a RecordSet</h2>
-<p>You can append a new Record to an existing RecordSet using <code>appendNew()</code>, optionally passing any
-data you want to initially populate into the Record:</p>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="cp">&lt;?php</span>
-<span class="nv">$newThread</span> <span class="o">=</span> <span class="nv">$threadRecordSet</span><span class="o">-&gt;</span><span class="na">appendNew</span><span class="p">([</span>
-    <span class="s1">&#39;title&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;New Title&#39;</span><span class="p">,</span>
-<span class="p">]);</span>
-</pre></div>
-</td></tr></table>
+sections on Marking Records for Deletion and deleting Records.</p>
+</div>
                 
                   
                 
@@ -391,6 +557,20 @@ data you want to initially populate into the Record:</p>
             </div>
           </a>
         
+        
+          <a href="../transactions/" title="Transactions (Unit of Work)" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Transactions (Unit of Work)
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
         
       </nav>
     </div>
