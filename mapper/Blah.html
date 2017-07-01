@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
 <meta name="HandheldFriendly" content="True"/>
-<title>Atlas</title>
+<title>Adding Custom Logic to Records and RecordSets</title>
     <link rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.5/yeti/bootstrap.min.css">
 <link rel="stylesheet"
@@ -409,7 +409,7 @@
 
     </li>
                         <li>
-    <a href="/mapper/logic.html">Record and RecordSet Logic</a>
+    <a href="/mapper/Blah.html">Adding Custom Logic to Records and RecordSets</a>
 
     </li>
                         <li>
@@ -418,10 +418,6 @@
     </li>
                         <li>
     <a href="/mapper/direct.html">Direct Queries</a>
-
-    </li>
-                        <li>
-    <a href="/mapper/domain.html">Domain Models</a>
 
     </li>
             </ul>
@@ -446,16 +442,99 @@
 </header>
 <div class="container">
     <ol class="breadcrumb">
-                        <li class="active">Atlas</li>
+                        <li><a href="/">Atlas</a></li>
+                                <li><a href="/mapper/">Persistence Mapper</a></li>
+                                <li class="active">Adding Custom Logic to Records and RecordSets</li>
             </ol>
     <div class="row">
 
-                <div class="col-md-12">
+                <div class="col-md-3">
+            <nav class="nav-left hidden-xs hidden-sm" id="sideNav">
+    <ul class="nav nav-stacked" data-spy="affix" data-offset-top="59" role="tablist">
+                                <li>
+                <a href="#1-7" title="Adding&#x20;Custom&#x20;Logic&#x20;to&#x20;Records&#x20;and&#x20;RecordSets">Adding Custom Logic to R...</a>
+            </li>
+            </ul>
+</nav>
+        </div>
+                <div class="col-md-9">
+<div id="section-main"><h1 id="1-7">1.7. Adding Custom Logic to Records and RecordSets</h1>
+<p>Atlas makes it easy to add your own logic to both Records and RecordSets. To
+accomplish this, you need a Record class for custom Record logic, and a
+RecordSet class for custom RecordSet logic. The Atlas CLI script
+(installable via composer using <code>atlas/cli</code>), can create these classes for you,
+saving you from manually writing them.
+<a href="https://github.com/atlasphp/Atlas.Cli/blob/1.x/README.md">Atlas CLI documentation</a>
+is available on GitHub.</p>
+<p>Here is an example using the <code>atlas/cli</code> package and the <code>--full</code> option.</p>
+<pre><code>./vendor/bin/atlas-skeleton.php \
+    --conn=/path/to/conn.php \
+    --dir=src/App/DataSource \
+    --table=threads \
+    --full \
+    App\\DataSource\\Thread
+</code></pre>
+<p>Upon completion, you will have a folder layout as follows:</p>
+<pre><code>-- src
+   -- App
+      -- DataSource
+         -- Thread
+            -- ThreadMapper.php
+            -- ThreadMapperEvents.php
+            -- ThreadRecord.php
+            -- ThreadRecordSet.php
+            -- ThreadTable.php
+            -- ThreadTableEvents.php
+</code></pre>
+<p>Once you have a Record Class (ThreadRecord.php), you can create custom methods
+to call from your Record object.</p>
+<pre><code class="language-php">&lt;?php
+namespace App\DataSource\Thread;
 
-<h1>Atlas</h1>
-<ul class="list-toc list-group">
-<li class="list-group-item"><div class="row clearfix"><div class="col-sm-2"><span class="text-number">1.</span></div><div class="col-sm-10"><a href="/mapper/">Persistence Mapper</a></div></div></li><li class="list-group-item"><div class="row clearfix"><div class="col-sm-2"><span class="text-number">2.</span></div><div class="col-sm-10"><a href="/skeleton/">Skeleton Generator</a></div></div></li></ul>
-<div id="section-main"></div>        </div>
+use Atlas\Orm\Mapper\Record;
+
+/**
+ * @inheritdoc
+ */
+class ThreadRecord extends Record
+{
+    // Format the date_created property
+    public function formatDate($format = 'M jS, Y')
+    {
+        $dateTime = new \DateTime($this-&gt;date_created);
+        return $dateTime-&gt;format($format);
+    }
+}
+$thread = $atlas-&gt;fetchRecord(ThreadMapper::CLASS, $id);
+echo $thread-&gt;formatDate(); // outputs something like `Aug 21st, 2017`
+</code></pre>
+<p>The same concept is available for RecordSets using the RecordSet class. In our
+example <code>ThreadRecordSet.php</code>.</p>
+<pre><code class="language-php">&lt;?php
+namespace App\DataSource\Thread;
+
+use Atlas\Orm\Mapper\RecordSet;
+
+/**
+ * @inheritdoc
+ */
+class ThreadRecordSet extends RecordSet
+{
+    public function foo()
+    {
+        $data = []
+        foreach ($this as $record) {
+            $data[] = $record-&gt;title;
+        }
+
+        return implode('; ', $data);
+    }
+}
+$threads = $atlas-&gt;fetchRecordSet(ThreadMapper::CLASS, [1, 2, 3]);
+
+echo $threads-&gt;foo();
+</code></pre>
+</div>        </div>
     </div>
 </div>
 
@@ -464,9 +543,9 @@
         <div class="container">
             <div class="row">
                 <div class="prev col-xs-6">
-                                    </div>
+                                            <a href="/mapper/transactions.html">Previous</a>                                    </div>
                 <div class="next col-xs-6">
-                                            <a href="/mapper/">Next</a>                                    </div>
+                                            <a href="/mapper/events.html">Next</a>                                    </div>
             </div>
         </div>
     </div>
